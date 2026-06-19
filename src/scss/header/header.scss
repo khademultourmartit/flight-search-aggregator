@@ -1,0 +1,29 @@
+@import "../variables.scss";
+
+.home-page-header {
+  padding: 12px 0;
+  background: transparent;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+}
+
+.login-button {
+  background: $wl-primary-button-color;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: $theme-font;
+  font-size: 12px;
+  transition: 0.3s;
+}

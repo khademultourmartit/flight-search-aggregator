@@ -28,11 +28,11 @@ export default function SearchForm({
 
   const [origin, setOrigin] = React.useState(initialValues?.origin ?? "DAC");
   const [destination, setDestination] = React.useState(
-    initialValues?.destination ?? "DXB"
+    initialValues?.destination ?? "DXB",
   );
   const [date, setDate] = React.useState(initialValues?.date ?? DEFAULT_DATE);
   const [passengers, setPassengers] = React.useState(
-    initialValues?.passengers ?? 1
+    initialValues?.passengers ?? 1,
   );
   const [formError, setFormError] = React.useState<string | null>(null);
 
@@ -151,7 +151,10 @@ export default function SearchForm({
         </Grid>
 
         {formError && (
-          <Box role="alert" sx={{ color: "error.main", mt: 2, fontSize: "0.9rem" }}>
+          <Box
+            role="alert"
+            sx={{ color: "error.main", mt: 2, fontSize: "0.9rem" }}
+          >
             {formError}
           </Box>
         )}

@@ -7,8 +7,7 @@ import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "iBox Air | Flight Search & Booking",
-  description:
-    "Search, compare, and book flights. A demo frontend built with Next.js, TypeScript, and Material UI.",
+  description: "Search, compare, and book flights.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
