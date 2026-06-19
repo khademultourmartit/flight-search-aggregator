@@ -6,7 +6,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import SearchForm from "@/components/FlightSearchBox";
+import FlightSearchBox from "@/components/FlightSearchBox";
 import FlightCard from "@/components/FlightCard";
 import FlightFilters from "@/components/FlightFilters";
 import LoadingState from "@/components/LoadingState";
@@ -115,15 +115,12 @@ export default function SearchResultsClient() {
           "A network error occurred. Check your connection and try again.",
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [origin, destination, date, passengers]);
 
   React.useEffect(() => {
     fetchFlights();
   }, [fetchFlights]);
 
-  // Reset filters whenever a fresh search is run, and seed the price
-  // slider's ceiling from the actual results.
   React.useEffect(() => {
     if (state.status === "success" && !maxPriceInitialized) {
       const highest = Math.max(0, ...state.flights.map((f) => f.price));
@@ -157,14 +154,14 @@ export default function SearchResultsClient() {
   return (
     <Container maxWidth="lg" sx={{ py: { xs: 3, md: 5 } }}>
       <Box sx={{ mb: 3 }}>
-        <SearchForm
-          compact
-          initialValues={{
-            origin,
-            destination,
-            date,
-            passengers: Number(passengers),
-          }}
+        <FlightSearchBox
+        //  compact
+        // initialValues={{
+        //   origin,
+        //   destination,
+        //   date,
+        //   passengers: Number(passengers),
+        // }}
         />
       </Box>
 
