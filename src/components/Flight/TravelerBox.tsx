@@ -1,8 +1,13 @@
 import React from "react";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import "../../scss/flight-search-box/flight-search-box.scss";
 
-const TravelerBox = ({ passengers, updatePassenger, handleClose }: any) => {
+const TravelerBox = ({
+  passengers,
+  updatePassenger,
+  handleClose,
+  setTravelerBoxOpen,
+}: any) => {
   const handleClick = (
     e: React.MouseEvent,
     type: string,
@@ -95,42 +100,6 @@ const TravelerBox = ({ passengers, updatePassenger, handleClose }: any) => {
           </Stack>
         </Stack>
 
-        {/* ---------------- KID ---------------- */}
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          pb={1.5}
-        >
-          <Box width="60%">
-            <Typography className="counter-label">Kids</Typography>
-            <Typography className="counter-subtext">Aged 2y - 5y</Typography>
-          </Box>
-
-          <Stack
-            direction="row"
-            spacing={1}
-            width="40%"
-            justifyContent="space-between"
-          >
-            <button
-              onClick={(e) => handleClick(e, "kid", "dec")}
-              className="counter-btn decrement"
-            >
-              -
-            </button>
-
-            <Typography className="count-value">{passengers.kid}</Typography>
-
-            <button
-              onClick={(e) => handleClick(e, "kid", "inc")}
-              className="counter-btn increment"
-            >
-              +
-            </button>
-          </Stack>
-        </Stack>
-
         {/* ---------------- INFANT ---------------- */}
         <Stack
           direction="row"
@@ -160,44 +129,6 @@ const TravelerBox = ({ passengers, updatePassenger, handleClose }: any) => {
 
             <button
               onClick={(e) => handleClick(e, "infant", "inc")}
-              className="counter-btn increment"
-            >
-              +
-            </button>
-          </Stack>
-        </Stack>
-
-        {/* ---------------- INFANT WITH SEAT ---------------- */}
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          pb={1}
-        >
-          <Box width="60%">
-            <Typography className="counter-label">Infant With Seat</Typography>
-            <Typography className="counter-subtext">Below 24 m</Typography>
-          </Box>
-
-          <Stack
-            direction="row"
-            spacing={1}
-            width="40%"
-            justifyContent="space-between"
-          >
-            <button
-              onClick={(e) => handleClick(e, "infantWithSeat", "dec")}
-              className="counter-btn decrement"
-            >
-              -
-            </button>
-
-            <Typography className="count-value">
-              {passengers.infantWithSeat}
-            </Typography>
-
-            <button
-              onClick={(e) => handleClick(e, "infantWithSeat", "inc")}
               className="counter-btn increment"
             >
               +

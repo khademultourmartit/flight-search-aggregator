@@ -27,8 +27,6 @@ export interface Airport {
   countryCode: string;
 }
 
-const DEFAULT_DATE = "2026-06-19";
-
 export default function SearchForm() {
   const router = useRouter();
 
@@ -158,6 +156,8 @@ export default function SearchForm() {
               e.stopPropagation();
               setOpenFrom((p) => !p);
               setOpenTo(false);
+              setTravelerBoxOpen(false);
+              setOpenJourneyDate(false);
             }}
             className="flight-from-grid"
           >
@@ -183,9 +183,7 @@ export default function SearchForm() {
               {/* SELECTED */}
               {!openFrom && fromSearchText && (
                 <Box className="flight-location-info">
-                  <Typography sx={{ fontSize: "12px", color: "#757F89" }}>
-                    From
-                  </Typography>
+                  <Typography className="flight-airport">From</Typography>
 
                   <Typography className="flight-city">
                     {fromSearchText.cityName} ({fromSearchText.airportCode})
@@ -221,6 +219,8 @@ export default function SearchForm() {
               e.stopPropagation();
               setOpenTo((p) => !p);
               setOpenFrom(false);
+              setTravelerBoxOpen(false);
+              setOpenJourneyDate(false);
             }}
           >
             <Box className="flight-from-box">
@@ -243,9 +243,7 @@ export default function SearchForm() {
 
               {!openTo && toSearchText && (
                 <Box className="flight-location-info">
-                  <Typography sx={{ fontSize: "12px", color: "#757F89" }}>
-                    To
-                  </Typography>
+                  <Typography className="flight-airport">To</Typography>
 
                   <Typography className="flight-city">
                     {toSearchText.cityName} ({toSearchText.airportCode})
@@ -281,24 +279,19 @@ export default function SearchForm() {
               setOpenJourneyDate((prev) => !prev);
               setOpenFrom(false);
               setOpenTo(false);
+              setTravelerBoxOpen(false);
             }}
           >
             <Box className="flight-from-box">
               <Box className="flight-location-info">
-                <Typography sx={{ fontSize: "12px", color: "#757F89" }}>
-                  Departure
-                </Typography>
+                <Typography className="flight-airport">Departure</Typography>
 
                 <Typography className="flight-city">
-                  {new Date(date).toLocaleDateString("en-GB", {
-                    day: "2-digit",
-                    month: "short",
-                    year: "numeric",
-                  })}
+                  {moment(date).format("DD MMM YYYY")}
                 </Typography>
 
                 <Typography className="flight-airport">
-                  Select journey date
+                  {moment(date).format("dddd")}
                 </Typography>
               </Box>
 
@@ -342,7 +335,7 @@ export default function SearchForm() {
                   }}
                 >
                   <Box className="flight-location-info">
-                    <Typography sx={{ fontSize: "12px", color: "#757F89" }}>
+                    <Typography className="flight-airport">
                       Passenger
                     </Typography>
 
@@ -355,8 +348,8 @@ export default function SearchForm() {
                       noWrap
                       title={`Adults: {passengers.adult}, Children: {passengers.child}, Infants: {passengers.infant}`}
                     >
-                      Adults: {passengers.adult}, Children: {passengers.child},
-                      Infants: {passengers.infant}
+                      ADT: {passengers.adult}, CHD: {passengers.child}, INF:{" "}
+                      {passengers.infant}
                     </Typography>
                   </Box>
                 </Box>
@@ -368,6 +361,7 @@ export default function SearchForm() {
                   <TravelerBox
                     passengers={passengers}
                     updatePassenger={updatePassenger}
+                    setTravelerBoxOpen={setTravelerBoxOpen}
                     handleClose={() => setTravelerBoxOpen(false)}
                   />
                 </Box>
@@ -382,7 +376,7 @@ export default function SearchForm() {
               variant="contained"
               fullWidth
               startIcon={<SearchIcon />}
-              sx={{ height: "80px" }}
+              sx={{ height: "73px" }}
             >
               Search
             </Button>

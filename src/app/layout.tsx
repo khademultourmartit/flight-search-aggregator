@@ -6,7 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "iBox Air | Flight Search & Booking",
+  title: " Air | Flight Search & Booking",
   description: "Search, compare, and book flights.",
 };
 
