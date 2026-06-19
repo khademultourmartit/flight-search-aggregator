@@ -167,39 +167,10 @@
   }
 }
 
-.reverse-icon {
-  cursor: pointer;
-  position: absolute;
-  right: -18px;
-  top: 60%;
-  transform: translateY(-50%);
-  z-index: 1001;
-}
-
 .calender-date {
   font-size: 18px !important;
   color: $wl-nav-text-active-color;
   cursor: pointer;
-}
-
-.flight-custom-checkbox {
-  .MuiCheckbox-root {
-    transform: scale(1.2);
-    color: $theme-color;
-
-    &.Mui-checked {
-      color: $theme-color;
-    }
-
-    .MuiSvgIcon-root {
-      font-size: 18px;
-    }
-  }
-
-  .MuiFormControlLabel-label {
-    font-size: 12px;
-    color: $wl-secondary-text-color;
-  }
 }
 
 .flight-box-bgcolor {
@@ -473,4 +444,12 @@
       box-shadow: none !important;
     }
   }
+}
+
+.flight-search-error {
+  color: $wl-danger-color;
+  font-size: 11px !important;
+  font-family: $theme-font !important;
+  font-weight: 600 !important;
+  margin-top: 10px;
 }

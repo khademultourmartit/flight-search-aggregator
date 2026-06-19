@@ -384,7 +384,11 @@ export default function SearchForm() {
         </Grid>
 
         {/* ---------------- ERROR ---------------- */}
-        {error && <Box sx={{ color: "red", mt: 2 }}>{error}</Box>}
+        {error && (
+          <Box>
+            <Typography className="flight-search-error">{error}</Typography>
+          </Box>
+        )}
       </Box>
     </ClickAwayListener>
   );

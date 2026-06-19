@@ -6,7 +6,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import SearchForm from "@/components/SearchForm";
+import SearchForm from "@/components/FlightSearchBox";
 import FlightCard from "@/components/FlightCard";
 import FlightFilters from "@/components/FlightFilters";
 import LoadingState from "@/components/LoadingState";
@@ -36,16 +36,24 @@ function sortFlights(flights: Flight[], sort: SortOption): Flight[] {
       return sorted.sort((a, b) => a.durationMinutes - b.durationMinutes);
     case "departure-asc":
       return sorted.sort(
-        (a, b) => new Date(a.departureTime).getTime() - new Date(b.departureTime).getTime()
+        (a, b) =>
+          new Date(a.departureTime).getTime() -
+          new Date(b.departureTime).getTime(),
       );
     default:
       return sorted;
   }
 }
 
-function applyFilters(flights: Flight[], filters: FlightFiltersState): Flight[] {
+function applyFilters(
+  flights: Flight[],
+  filters: FlightFiltersState,
+): Flight[] {
   return flights.filter((flight) => {
-    if (filters.airlines.length > 0 && !filters.airlines.includes(flight.airline)) {
+    if (
+      filters.airlines.length > 0 &&
+      !filters.airlines.includes(flight.airline)
+    ) {
       return false;
     }
     if (filters.stops === "nonstop" && flight.stops !== 0) {
@@ -81,9 +89,16 @@ export default function SearchResultsClient() {
   const fetchFlights = React.useCallback(async () => {
     setState({ status: "loading" });
     try {
-      const params = new URLSearchParams({ origin, destination, date, passengers });
+      const params = new URLSearchParams({
+        origin,
+        destination,
+        date,
+        passengers,
+      });
       const response = await fetch(`/api/flights?${params.toString()}`);
-      const body = (await response.json()) as FlightSearchResponse | ApiErrorResponse;
+      const body = (await response.json()) as
+        | FlightSearchResponse
+        | ApiErrorResponse;
 
       if (!response.ok) {
         const errorBody = body as ApiErrorResponse;
@@ -96,7 +111,8 @@ export default function SearchResultsClient() {
     } catch {
       setState({
         status: "error",
-        message: "A network error occurred. Check your connection and try again.",
+        message:
+          "A network error occurred. Check your connection and try again.",
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -111,14 +127,21 @@ export default function SearchResultsClient() {
   React.useEffect(() => {
     if (state.status === "success" && !maxPriceInitialized) {
       const highest = Math.max(0, ...state.flights.map((f) => f.price));
-      setFilters((prev) => ({ ...prev, maxPrice: highest || Number.MAX_SAFE_INTEGER }));
+      setFilters((prev) => ({
+        ...prev,
+        maxPrice: highest || Number.MAX_SAFE_INTEGER,
+      }));
       setMaxPriceInitialized(true);
     }
   }, [state, maxPriceInitialized]);
 
   React.useEffect(() => {
     setMaxPriceInitialized(false);
-    setFilters({ airlines: [], stops: "any", maxPrice: Number.MAX_SAFE_INTEGER });
+    setFilters({
+      airlines: [],
+      stops: "any",
+      maxPrice: Number.MAX_SAFE_INTEGER,
+    });
   }, [origin, destination, date, passengers]);
 
   const airlines = React.useMemo(() => {
@@ -170,10 +193,16 @@ export default function SearchResultsClient() {
           <Grid item xs={12} md={9}>
             <Stack spacing={2}>
               {visibleFlights.map((flight) => (
-                <FlightCard key={flight.id} flight={flight} passengers={Number(passengers)} />
+                <FlightCard
+                  key={flight.id}
+                  flight={flight}
+                  passengers={Number(passengers)}
+                />
               ))}
               {visibleFlights.length === 0 && (
-                <Box sx={{ textAlign: "center", py: 6, color: "text.secondary" }}>
+                <Box
+                  sx={{ textAlign: "center", py: 6, color: "text.secondary" }}
+                >
                   No flights match the selected filters.
                 </Box>
               )}

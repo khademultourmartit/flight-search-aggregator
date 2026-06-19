@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import SearchForm from "@/components/SearchForm";
+import SearchForm from "@/components/FlightSearchBox";
 import PromoVideo from "@/components/PromoVideo";
 
 export default function HomePage() {
