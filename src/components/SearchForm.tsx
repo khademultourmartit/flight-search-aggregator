@@ -15,6 +15,7 @@ import { Calendar, DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import moment from "moment";
+import TravelerBox from "./Flight/TravelerBox";
 
 export interface Airport {
   id: number;
@@ -63,7 +64,22 @@ export default function SearchForm() {
   // ---------------- OTHER ----------------
   const [openJourneyDate, setOpenJourneyDate] = React.useState(false);
   const [date, setDate] = React.useState<Date>(new Date());
-  const [passengers, setPassengers] = React.useState(1);
+
+  const [travelerBoxOpen, setTravelerBoxOpen] = React.useState(false);
+  const [passengers, setPassengers] = React.useState({
+    adult: 1,
+    child: 0,
+    kid: 0,
+    infant: 0,
+    infantWithSeat: 0,
+  });
+
+  const totalPassengers =
+    passengers.adult +
+    passengers.child +
+    passengers.kid +
+    passengers.infant +
+    passengers.infantWithSeat;
   const [error, setError] = React.useState<string | null>(null);
 
   // ---------------- API ----------------
@@ -80,6 +96,17 @@ export default function SearchForm() {
 
     if (type === "from") setFromOptions(airports);
     else setToOptions(airports);
+  };
+
+  const updatePassenger = (type: string, action: "inc" | "dec") => {
+    setPassengers((prev) => {
+      const value = prev[type as keyof typeof prev];
+
+      return {
+        ...prev,
+        [type]: action === "inc" ? value + 1 : Math.max(0, value - 1),
+      };
+    });
   };
 
   // ---------------- SUBMIT ----------------
@@ -100,7 +127,7 @@ export default function SearchForm() {
       origin: fromSearchText.cityCode,
       destination: toSearchText.cityCode,
       date: moment(date).format("YYYY-MM-DD"),
-      passengers: String(passengers),
+      passengers: String(totalPassengers),
     });
 
     router.push(`/search?${params.toString()}`);
@@ -110,11 +137,16 @@ export default function SearchForm() {
     setOpenFrom(false);
     setOpenTo(false);
     setOpenJourneyDate(false);
+    setTravelerBoxOpen(false);
   };
 
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
-      <Box component="form" onSubmit={handleSubmit}>
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        className="flight-search-box-bgcolor "
+      >
         <Grid container spacing={2} alignItems="flex-end">
           {/* ---------------- FROM ---------------- */}
           <Grid
@@ -274,7 +306,7 @@ export default function SearchForm() {
                 <Box onClick={(e) => e.stopPropagation()}>
                   <Calendar
                     className="dashboard-calendar"
-                    color="#5C0731"
+                    color="#1d2959"
                     date={date}
                     direction="horizontal"
                     minDate={new Date()}
@@ -289,20 +321,58 @@ export default function SearchForm() {
           </Grid>
 
           {/* ---------------- PASSENGERS ---------------- */}
+
           <Grid item xs={12} sm={6} md={2}>
-            <TextField
-              select
-              fullWidth
-              value={passengers}
-              onChange={(e) => setPassengers(Number(e.target.value))}
-              SelectProps={{ native: true }}
+            <Box
+              className="flight-from-box"
+              onClick={() => {
+                setTravelerBoxOpen((prev) => !prev);
+                setOpenFrom(false);
+                setOpenTo(false);
+                setOpenJourneyDate(false);
+              }}
             >
-              {Array.from({ length: 9 }, (_, i) => i + 1).map((n) => (
-                <option key={n} value={n}>
-                  {n}
-                </option>
-              ))}
-            </TextField>
+              <Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "10px",
+                    cursor: "pointer",
+                  }}
+                >
+                  <Box className="flight-location-info">
+                    <Typography sx={{ fontSize: "12px", color: "#757F89" }}>
+                      Passenger
+                    </Typography>
+
+                    <Typography className="flight-city">
+                      {totalPassengers} Passengers
+                    </Typography>
+
+                    <Typography
+                      className="flight-airport"
+                      noWrap
+                      title={`Adults: {passengers.adult}, Children: {passengers.child}, Infants: {passengers.infant}`}
+                    >
+                      Adults: {passengers.adult}, Children: {passengers.child},
+                      Infants: {passengers.infant}
+                    </Typography>
+                  </Box>
+                </Box>
+              </Box>
+
+              {/* DROPDOWN */}
+              {travelerBoxOpen && (
+                <Box>
+                  <TravelerBox
+                    passengers={passengers}
+                    updatePassenger={updatePassenger}
+                    handleClose={() => setTravelerBoxOpen(false)}
+                  />
+                </Box>
+              )}
+            </Box>
           </Grid>
 
           {/* ---------------- BUTTON ---------------- */}
@@ -312,7 +382,7 @@ export default function SearchForm() {
               variant="contained"
               fullWidth
               startIcon={<SearchIcon />}
-              sx={{ height: "56px" }}
+              sx={{ height: "80px" }}
             >
               Search
             </Button>

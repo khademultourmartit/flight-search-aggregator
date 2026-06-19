@@ -1,44 +1,25 @@
 import React from "react";
-import {
-  Box,
-  Button,
-  Stack,
-  Typography,
-  FormControl,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-  Grid,
-} from "@mui/material";
-
+import { Box, Stack, Typography } from "@mui/material";
 import "../../scss/flight-search-box/flight-search-box.scss";
 
-const TravelerBox = ({
-  adultDecrement,
-  adultCount,
-  adultInclement,
-  childDecrement,
-  childCount,
-  childIncrement,
-  kidDecrement,
-  kidCount,
-  kidInclement,
-  infantDecrement,
-  infantCount,
-  infantIncrement,
-  infantWithSeatIncrement,
-  infantWithSeatCount,
-  infantWithSeatDecrement,
-  handleClose,
-}: any) => {
+const TravelerBox = ({ passengers, updatePassenger, handleClose }: any) => {
+  const handleClick = (
+    e: React.MouseEvent,
+    type: string,
+    action: "inc" | "dec",
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
+    updatePassenger(type, action);
+  };
+
   return (
     <Box className="traveler-box">
-      <Box p={2}>
-        {/* Traveler Section */}
+      <Box p={2} onClick={(e) => e.stopPropagation()}>
+        {/* ---------------- TITLE ---------------- */}
         <Typography className="section-title">Passengers</Typography>
-        {/* <Box className="divider-travelBox" /> */}
 
-        {/* Adult */}
+        {/* ---------------- ADULT ---------------- */}
         <Stack
           direction="row"
           justifyContent="space-between"
@@ -51,23 +32,32 @@ const TravelerBox = ({
               12 years and above
             </Typography>
           </Box>
+
           <Stack
             direction="row"
             spacing={1}
             width="40%"
             justifyContent="space-between"
           >
-            <button onClick={adultDecrement} className="counter-btn decrement">
+            <button
+              onClick={(e) => handleClick(e, "adult", "dec")}
+              className="counter-btn decrement"
+            >
               -
             </button>
-            <Typography className="count-value">{adultCount}</Typography>
-            <button onClick={adultInclement} className="counter-btn increment">
+
+            <Typography className="count-value">{passengers.adult}</Typography>
+
+            <button
+              onClick={(e) => handleClick(e, "adult", "inc")}
+              className="counter-btn increment"
+            >
               +
             </button>
           </Stack>
         </Stack>
 
-        {/* Child */}
+        {/* ---------------- CHILD ---------------- */}
         <Stack
           direction="row"
           justifyContent="space-between"
@@ -80,23 +70,32 @@ const TravelerBox = ({
               2 years - under 12 years
             </Typography>
           </Box>
+
           <Stack
             direction="row"
             spacing={1}
             width="40%"
             justifyContent="space-between"
           >
-            <button onClick={childDecrement} className="counter-btn decrement">
+            <button
+              onClick={(e) => handleClick(e, "child", "dec")}
+              className="counter-btn decrement"
+            >
               -
             </button>
-            <Typography className="count-value">{childCount}</Typography>
-            <button onClick={childIncrement} className="counter-btn increment">
+
+            <Typography className="count-value">{passengers.child}</Typography>
+
+            <button
+              onClick={(e) => handleClick(e, "child", "inc")}
+              className="counter-btn increment"
+            >
               +
             </button>
           </Stack>
         </Stack>
 
-        {/* Kids */}
+        {/* ---------------- KID ---------------- */}
         <Stack
           direction="row"
           justifyContent="space-between"
@@ -107,23 +106,32 @@ const TravelerBox = ({
             <Typography className="counter-label">Kids</Typography>
             <Typography className="counter-subtext">Aged 2y - 5y</Typography>
           </Box>
+
           <Stack
             direction="row"
             spacing={1}
             width="40%"
             justifyContent="space-between"
           >
-            <button onClick={kidDecrement} className="counter-btn decrement">
+            <button
+              onClick={(e) => handleClick(e, "kid", "dec")}
+              className="counter-btn decrement"
+            >
               -
             </button>
-            <Typography className="count-value">{kidCount}</Typography>
-            <button onClick={kidInclement} className="counter-btn increment">
+
+            <Typography className="count-value">{passengers.kid}</Typography>
+
+            <button
+              onClick={(e) => handleClick(e, "kid", "inc")}
+              className="counter-btn increment"
+            >
               +
             </button>
           </Stack>
         </Stack>
 
-        {/* Infant */}
+        {/* ---------------- INFANT ---------------- */}
         <Stack
           direction="row"
           justifyContent="space-between"
@@ -134,23 +142,32 @@ const TravelerBox = ({
             <Typography className="counter-label">Infant</Typography>
             <Typography className="counter-subtext">Below 2 years</Typography>
           </Box>
+
           <Stack
             direction="row"
             spacing={1}
             width="40%"
             justifyContent="space-between"
           >
-            <button onClick={infantDecrement} className="counter-btn decrement">
+            <button
+              onClick={(e) => handleClick(e, "infant", "dec")}
+              className="counter-btn decrement"
+            >
               -
             </button>
-            <Typography className="count-value">{infantCount}</Typography>
-            <button onClick={infantIncrement} className="counter-btn increment">
+
+            <Typography className="count-value">{passengers.infant}</Typography>
+
+            <button
+              onClick={(e) => handleClick(e, "infant", "inc")}
+              className="counter-btn increment"
+            >
               +
             </button>
           </Stack>
         </Stack>
 
-        {/* Infant With Seat */}
+        {/* ---------------- INFANT WITH SEAT ---------------- */}
         <Stack
           direction="row"
           justifyContent="space-between"
@@ -161,6 +178,7 @@ const TravelerBox = ({
             <Typography className="counter-label">Infant With Seat</Typography>
             <Typography className="counter-subtext">Below 24 m</Typography>
           </Box>
+
           <Stack
             direction="row"
             spacing={1}
@@ -168,62 +186,24 @@ const TravelerBox = ({
             justifyContent="space-between"
           >
             <button
-              onClick={infantWithSeatDecrement}
+              onClick={(e) => handleClick(e, "infantWithSeat", "dec")}
               className="counter-btn decrement"
             >
               -
             </button>
+
             <Typography className="count-value">
-              {infantWithSeatCount}
+              {passengers.infantWithSeat}
             </Typography>
+
             <button
-              onClick={infantWithSeatIncrement}
+              onClick={(e) => handleClick(e, "infantWithSeat", "inc")}
               className="counter-btn increment"
             >
               +
             </button>
           </Stack>
         </Stack>
-
-        {/* Class Name Section */}
-
-        {/* <Typography className="section-title" mt={1}>
-          Class Name
-        </Typography>
-        <Box className="divider" />
-        <FormControl>
-          <RadioGroup value={className} onChange={handleClassName}>
-            <Grid container>
-              {flightClasses.map((classes, i) => (
-                <Grid item xs={12} key={i}>
-                  <FormControlLabel
-                    value={classes}
-                    control={
-                      <Radio
-                        sx={{
-                          color: "var(--theme-color)",
-                          "&.Mui-checked": { color: "var(--theme-color)" },
-                        }}
-                      />
-                    }
-                    label={
-                      <Typography className="radio-label">
-                        {classes.replace(/([a-z])([A-Z])/g, "$1 $2")}
-                      </Typography>
-                    }
-                  />
-                </Grid>
-              ))}
-            </Grid>
-          </RadioGroup>
-        </FormControl> */}
-
-        {/* Done Button */}
-        <Box mt={2} textAlign="right">
-          <Button size="small" onClick={handleClose} className="done-btn">
-            DONE
-          </Button>
-        </Box>
       </Box>
     </Box>
   );

@@ -15,7 +15,11 @@ const PLACEHOLDER_VIDEO_SRC =
 
 export default function PromoVideo() {
   return (
-    <Box component="section" aria-labelledby="promo-video-heading" sx={{ py: { xs: 6, md: 8 }, bgcolor: "background.paper" }}>
+    <Box
+      component="section"
+      aria-labelledby="promo-video-heading"
+      sx={{ py: { xs: 6, md: 8 }, bgcolor: "background.paper" }}
+    >
       <Container maxWidth="md">
         <Typography
           id="promo-video-heading"
@@ -24,7 +28,7 @@ export default function PromoVideo() {
           align="center"
           sx={{ mb: 1 }}
         >
-          See iBox Air in action
+          See Air in action
         </Typography>
         <Typography
           variant="body1"
@@ -48,7 +52,12 @@ export default function PromoVideo() {
             controls
             preload="metadata"
             aria-label="Promotional video showing the flight search and booking flow"
-            sx={{ width: "100%", height: "100%", display: "block", bgcolor: "#000" }}
+            sx={{
+              width: "100%",
+              height: "100%",
+              display: "block",
+              bgcolor: "#000",
+            }}
           >
             <source src={PLACEHOLDER_VIDEO_SRC} type="video/mp4" />
             Your browser does not support embedded video.

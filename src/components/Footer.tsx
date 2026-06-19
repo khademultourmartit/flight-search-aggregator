@@ -26,14 +26,19 @@ export default function Footer() {
         >
           <Box>
             <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-              iBox Air
+              Air Flight
             </Typography>
             <Typography variant="body2" sx={{ opacity: 0.8 }}>
               A demo flight search and booking experience.
             </Typography>
           </Box>
 
-          <Stack direction="row" spacing={3} component="nav" aria-label="Footer">
+          <Stack
+            direction="row"
+            spacing={3}
+            component="nav"
+            aria-label="Footer"
+          >
             <Link href="/" style={{ color: "inherit", opacity: 0.85 }}>
               Home
             </Link>
@@ -50,7 +55,7 @@ export default function Footer() {
           variant="body2"
           sx={{ opacity: 0.6, mt: 3, textAlign: { xs: "left", sm: "center" } }}
         >
-          © {year} iBox Air. Built for the iBox Lab frontend take-home exercise.
+          © {year} Air Flight
         </Typography>
       </Container>
     </Box>
