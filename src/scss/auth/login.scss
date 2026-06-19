@@ -1,0 +1,86 @@
+@import "../../scss/variables.scss";
+
+.form {
+  width: 100%;
+  padding: 20px 30px;
+  background: #fff;
+  text-align: left;
+
+  .brand-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: $wl-primary-text-color;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-family: $theme-font;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: $wl-secondary-text-color;
+    margin: 15px 0px;
+  }
+
+  .input-field {
+    width: 100%;
+    font-size: 14px;
+    color: #413755;
+    font-weight: 500;
+    margin-bottom: 15px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid $wl-border-color;
+    font-family: $theme-font;
+    transition: border-color 0.3s ease-in-out;
+
+    &:focus {
+      outline: none;
+      border-color: $wl-border-color;
+    }
+
+    &::placeholder {
+      color: $wl-placeholder-color;
+      font-size: 12px;
+      font-weight: 400;
+    }
+
+    &:hover {
+      border-color: $wl-border-color;
+    }
+  }
+
+  .login-button {
+    width: 100%;
+    background-color: $wl-primary-button-color;
+    color: #ededfc;
+    font-size: 12px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    font-family: $theme-font;
+    border-radius: 5px;
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .loading-icon {
+      color: #fff;
+    }
+  }
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 12px;
+  color: $wl-secondary-text-color;
+}
+
+.footer-link {
+  font-size: 12px;
+  color: $wl-primary-text-color;
+  margin: 10px 0;
+  text-decoration: underline;
+}
