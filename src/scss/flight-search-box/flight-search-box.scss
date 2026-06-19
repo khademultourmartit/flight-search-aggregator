@@ -1,0 +1,709 @@
+@import "../../scss/variables.scss";
+
+.flight-from-grid {
+  position: relative;
+}
+
+.radio-label-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.menu-radio {
+  margin-right: 15px !important;
+}
+
+.icon {
+  object-fit: contain;
+}
+
+.flight-search-icon {
+  width: 50px !important;
+  height: 50px !important;
+
+  @media (max-width: 600px) {
+    width: 25px !important;
+    height: 25px !important;
+  }
+}
+
+.flight-from-box {
+  position: relative;
+  border: 2px solid #c7cacf;
+  padding: 0px 10px;
+  border-radius: $border-radius;
+  background: #fff;
+  height: 80px;
+}
+
+.flight-class-box {
+  position: relative;
+  border: 1px solid #c7cacf;
+  padding: 4px;
+  border-radius: $border-radius;
+  background: #fff;
+}
+
+.flight-input-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #003566;
+  background-color: #fff;
+  font-family: "Poppins", sans-serif;
+}
+
+.flight-input {
+  width: 100%;
+  height: 70px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: $wl-placeholder-color;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+
+  &::placeholder {
+    color: $wl-placeholder-color;
+  }
+}
+
+.flight-location-info {
+  margin-top: 8px;
+}
+
+.flight-city {
+  color: $wl-primary-text-color !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  font-family: $theme-font !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 18px !important;
+}
+
+.flight-class-text {
+  color: #757f89 !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  font-family: $theme-font !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 18px !important;
+}
+
+.traveler-flight-city {
+  color: $wl-primary-text-color !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  font-family: $theme-font !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-top: 5px;
+}
+
+.flight-airport {
+  color: #757f89;
+  font-size: 11px !important;
+  font-family: $theme-font !important;
+  font-weight: 600 !important;
+  cursor: pointer;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.same-place-wrapper {
+  padding-top: 44px;
+}
+
+.calendar-btn {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #ad8398;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  svg {
+    font-size: 14px;
+    color: #fff;
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+
+  &.disabled {
+    background: #ddd;
+    cursor: not-allowed;
+    pointer-events: none; // 🔥 disable click
+
+    svg {
+      color: #999;
+    }
+  }
+}
+
+.fare-type-wrapper {
+  width: 100%;
+}
+
+.fare-type-select {
+  width: 100% !important;
+
+  .MuiOutlinedInput-root {
+    border-radius: 8px;
+
+    fieldset {
+      border-color: #c7cacf !important; // default border
+    }
+
+    &:hover fieldset {
+      border-color: #78003b !important; // hover border
+    }
+
+    &.Mui-focused fieldset {
+      border-color: #78003b !important; // focused border
+      box-shadow: none !important; // remove blue glow
+    }
+  }
+}
+
+.fare-option-text {
+  font-size: 14px !important;
+  color: $wl-primary-text-color !important;
+  font-weight: 500 !important;
+  font-family: "Poppins", sans-serif !important;
+}
+
+.flight-dropdown-panel {
+  position: absolute;
+  top: 105%;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border-radius: 0px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+}
+
+.flight-takeoff-icon {
+  font-size: 30px !important;
+  color: $wl-primary-button-color;
+}
+
+.reverse-icon-wrapper {
+  display: none;
+
+  @media (min-width: 600px) {
+    display: block;
+  }
+}
+
+.reverse-icon {
+  cursor: pointer;
+  position: absolute;
+  right: -18px;
+  top: 60%;
+  transform: translateY(-50%);
+  z-index: 1001;
+}
+
+.calender-date {
+  font-size: 18px !important;
+  color: $wl-nav-text-active-color;
+  cursor: pointer;
+}
+
+.flight-custom-checkbox {
+  .MuiCheckbox-root {
+    transform: scale(1.2);
+    color: $theme-color;
+
+    &.Mui-checked {
+      color: $theme-color;
+    }
+
+    .MuiSvgIcon-root {
+      font-size: 18px;
+    }
+  }
+
+  .MuiFormControlLabel-label {
+    font-size: 12px;
+    color: $wl-secondary-text-color;
+  }
+}
+
+.flight-box-bgcolor {
+  background: #fff;
+  padding: 5px;
+  border-radius: 8px;
+  // box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+  // label for mobile select
+  .form-label {
+    font-size: 14px;
+    font-weight: 500;
+    font-family: $theme-font;
+    color: $wl-secondary-text-color;
+    margin-bottom: 6px;
+    display: inline-block;
+  }
+
+  .MuiMenuItem-root {
+    .MuiTypography-root {
+      font-size: 14px;
+      font-weight: 500;
+      font-family: $theme-font;
+      color: $wl-secondary-text-color;
+    }
+  }
+
+  .MuiFormControlLabel-root {
+    margin-top: 8px;
+
+    .MuiRadio-root {
+      color: $theme-color;
+
+      &.Mui-checked {
+        color: $theme-color;
+      }
+    }
+
+    .MuiFormControlLabel-label {
+      font-size: 12px;
+      font-family: $theme-font;
+      color: $wl-secondary-text-color;
+    }
+  }
+
+  .fare-tooltip {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 8px;
+    z-index: 10;
+    width: 300px;
+    padding: 12px;
+    background: #fff;
+    color: #000;
+    font-size: 13px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    white-space: pre-line;
+
+    .tooltip-title {
+      font-family: $theme-font;
+      color: $wl-text-color;
+      font-size: 16px;
+      font-weight: 600;
+      padding-bottom: 5px;
+    }
+
+    .tooltip-text {
+      font-size: 12px;
+      text-align: justify;
+      color: $wl-text-color;
+      font-family: $theme-font;
+    }
+  }
+}
+
+.flight-search-box-bgcolor {
+  background: #fff;
+  padding: 5px;
+  border-radius: 0px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.flight-search-btn {
+  background-color: $wl-primary-button-color !important;
+  color: $background-light !important;
+  width: 100%;
+  height: 91%;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 13px;
+  font-family: $theme-font !important;
+  font-weight: 500;
+  border-radius: $button-border-radius !important;
+  text-transform: uppercase;
+
+  &:hover {
+    background-color: $wl-primary-button-color !important;
+  }
+}
+
+.flight-search-btn-multicity {
+  background-color: $wl-primary-button-color !important;
+  color: $background-light !important;
+  width: 100%;
+  height: 100%;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 13px;
+  font-family: $theme-font !important;
+  font-weight: 500;
+  border-radius: $button-border-radius !important;
+  text-transform: uppercase;
+
+  &:hover {
+    background-color: $wl-primary-button-color !important;
+  }
+}
+
+.search-icon {
+  font-size: 22px !important;
+}
+.airport-lists-card {
+  max-height: 230px;
+  overflow-y: auto;
+  background: $background-light;
+  font-family: $theme-font;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .airport-item {
+    padding: 10px;
+    cursor: pointer;
+
+    .airport-header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .airport-title {
+        color: $theme-color;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-weight: 500;
+
+        svg {
+          color: $theme-color;
+          font-size: 23px;
+        }
+      }
+
+      .airport-all {
+        font-size: 11px;
+        color: $wl-secondary-text-color;
+      }
+    }
+
+    hr {
+      background-color: $wl-body-background;
+      height: 2px;
+      border: none;
+      margin: 8px 0;
+    }
+
+    .airport-subitem {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+      padding: 5px;
+      &:hover {
+        padding: 5px;
+        background-color: rgba($theme-color, 0.08); // soft theme hover
+      }
+
+      .airport-code {
+        height: 30px;
+        width: 45px;
+        background: $wl-body-background;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        span {
+          color: $theme-color;
+          font-weight: 500;
+          font-size: 13px;
+        }
+      }
+
+      .airport-info {
+        overflow: hidden;
+
+        .airport-city {
+          color: $wl-secondary-text-color;
+          font-size: 13px;
+          font-weight: 500;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+
+        .airport-name {
+          color: $wl-secondary-text-color;
+          font-size: 10px;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+
+  .not-found {
+    color: $wl-primary-text-color;
+    font-size: 13px !important;
+    text-align: center;
+    padding: 6px 0px;
+    font-weight: 700 !important;
+  }
+}
+
+.traveler-box {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  position: absolute;
+  top: 106%;
+  right: 0;
+  z-index: 100;
+  border-radius: $border-radius;
+  background-color: $background-light;
+  width: 290px;
+  // border: 1px solid $wl-border-color;
+
+  .section-title {
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: 600 !important;
+    color: $wl-text-color;
+    font-family: $theme-font !important;
+  }
+
+  .divider-travelBox {
+    border-top: 1px solid $wl-border-color;
+    // padding: 5px 0;
+    width: 100%;
+  }
+
+  .counter-label {
+    font-size: 14px;
+    color: $wl-primary-text-color;
+    font-weight: 600 !important;
+    font-family: $theme-font;
+  }
+
+  .counter-subtext {
+    font-size: 11px;
+    color: #818a95;
+    font-family: $theme-font;
+    font-weight: 500 !important;
+  }
+
+  .count-value {
+    font-size: 16px;
+    color: $wl-text-color;
+    font-family: $theme-font;
+    font-weight: 500 !important;
+  }
+
+  .counter-btn {
+    border: none;
+    width: 22px;
+    height: 22px;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: $border-radius;
+    cursor: pointer;
+    color: $background-light;
+
+    &.decrement {
+      background-color: #ad8398;
+    }
+
+    &.increment {
+      background-color: $wl-primary-button-color;
+    }
+  }
+
+  .MuiRadio-root {
+    color: $theme-color;
+  }
+
+  .MuiRadio-root.Mui-checked {
+    color: $theme-color;
+  }
+
+  .radio-label {
+    color: $wl-secondary-text-color;
+    font-size: 11px;
+    font-family: $theme-font;
+  }
+
+  .done-btn {
+    background-color: $theme-color;
+    color: $background-light;
+    font-family: $theme-font;
+    border-radius: $border-radius;
+    &:hover {
+      background-color: $theme-color !important;
+      box-shadow: none !important;
+    }
+  }
+}
+
+.flight-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+
+  @media (min-width: 600px) {
+    flex-direction: row;
+  }
+
+  .pnr-toggle {
+    background: #2f083d;
+    color: $background-light;
+    font-size: 12px;
+    font-family: $theme-font;
+    padding: 5px 18px;
+    border-radius: 3px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    cursor: pointer;
+
+    .MuiSvgIcon-root {
+      color: #ff5a7d;
+      font-size: 20px;
+    }
+
+    span,
+    p {
+      color: $background-light;
+      font-size: 12px;
+    }
+  }
+
+  .pnr-import {
+    background: $wl-primary-button-color;
+    color: $background-light;
+    font-size: 14px;
+    font-family: $theme-font;
+    padding: 5px 18px;
+    border-radius: 3px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    cursor: pointer;
+    justify-content: flex-end;
+
+    @media (max-width: 600px) {
+      margin-top: 8px;
+    }
+
+    .MuiSvgIcon-root {
+      color: $background-light;
+      font-size: 20px;
+    }
+
+    span,
+    p {
+      color: $background-light;
+      font-size: 12px;
+    }
+  }
+
+  .gds-link {
+    background: #2f083d;
+    color: $background-light;
+    font-size: 12px;
+    font-family: $theme-font;
+    padding: 5px 18px;
+    border-radius: 3px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    .MuiSvgIcon-root {
+      color: #ff5a7d;
+      font-size: 20px;
+    }
+
+    span,
+    p {
+      color: $background-light;
+      font-size: 12px;
+    }
+  }
+
+  .menu-tabs {
+    // width: fit-content;
+    // background-color: #f9e8f0;
+    // border: 2px solid #e1c6d2;
+    // padding: 4px;
+    // border-radius: $border-radius;
+    display: inline-block;
+
+    .MuiRadioGroup-root {
+      display: flex;
+      gap: 0;
+    }
+
+    .menu-radio {
+      margin: 0 !important;
+
+      .MuiFormControlLabel-label {
+        padding: 5px 15px;
+        border-radius: $border-radius;
+        font-size: 12px;
+        font-family: $theme-font;
+        color: $background-light;
+        font-weight: 500 !important;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        white-space: nowrap;
+        background: #ad8398;
+        margin-right: 5px;
+      }
+    }
+
+    /* 🔥 ACTIVE TAB */
+    .Mui-checked + .MuiFormControlLabel-label {
+      background: #78003b;
+      color: $background-light;
+      font-weight: 500 !important;
+    }
+
+    .icon {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.switch-label {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: $wl-text-color !important;
+  font-family: $theme-font !important;
+}

@@ -9,7 +9,7 @@ export default function HomePage() {
     <Box mt={2}>
       <Container maxWidth="lg"></Container>
 
-      <Container>
+      <Container maxWidth="xl">
         <SearchForm />
       </Container>
 

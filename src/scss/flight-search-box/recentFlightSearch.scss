@@ -1,0 +1,89 @@
+@import "../../scss/variables.scss";
+
+.recent-card-wrapper {
+  width: 100%;
+  padding-bottom: 8px;
+}
+
+.recent-card {
+  cursor: pointer;
+  padding: 12px 16px;
+  border-radius: $border-radius;
+  transition: all 0.25s ease;
+  background-color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.route-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.origin {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2d233c;
+  font-family: $theme-font !important;
+}
+
+.destination {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2d233c;
+  font-family: $theme-font !important;
+}
+
+.date-row {
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.date {
+  font-size: 11px;
+  color: #6c6477;
+  font-family: $theme-font !important;
+}
+
+.trip-type {
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: #78003b;
+  font-family: $theme-font !important;
+}
+
+.passenger {
+  gap: 6px;
+  display: flex;
+  font-size: 12px;
+  align-items: center;
+}
+
+.passenger-item {
+  gap: 3px;
+  display: flex;
+  align-items: center;
+}
+
+.passenger-count {
+  font-weight: 600;
+  color: $wl-primary-text-color;
+  font-family: $theme-font !important;
+}
+
+.passenger-label {
+  color: $wl-field-border-color;
+  font-family: $theme-font !important;
+  font-size: 11px;
+}
+
+.plus {
+  margin: 0 2px;
+  color: $wl-field-border-color;
+  font-family: $theme-font !important;
+}

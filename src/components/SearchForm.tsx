@@ -5,160 +5,323 @@ import { useRouter } from "next/navigation";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
-import Paper from "@mui/material/Paper";
 import SearchIcon from "@mui/icons-material/Search";
-import { AIRPORTS } from "@/utils/airports";
-import type { FlightSearchParams } from "@/types/flight";
+import Typography from "@mui/material/Typography";
+import AirportListsCard from "./Flight/AirportListsCard";
+import "../scss/flight-search-box/flight-search-box.scss";
+import { ClickAwayListener } from "@mui/material";
+import { Calendar, DateRangePicker } from "react-date-range";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
+import moment from "moment";
 
-interface SearchFormProps {
-  initialValues?: Partial<FlightSearchParams>;
-  /** Compact layout for reuse at the top of the results page. */
-  compact?: boolean;
+export interface Airport {
+  id: number;
+  airportCode: string;
+  airportName: string;
+  cityName: string;
+  cityCode: string;
+  countryName: string;
+  countryCode: string;
 }
 
 const DEFAULT_DATE = "2026-06-19";
 
-export default function SearchForm({
-  initialValues,
-  compact = false,
-}: SearchFormProps) {
+export default function SearchForm() {
   const router = useRouter();
 
-  const [origin, setOrigin] = React.useState(initialValues?.origin ?? "DAC");
-  const [destination, setDestination] = React.useState(
-    initialValues?.destination ?? "DXB",
-  );
-  const [date, setDate] = React.useState(initialValues?.date ?? DEFAULT_DATE);
-  const [passengers, setPassengers] = React.useState(
-    initialValues?.passengers ?? 1,
-  );
-  const [formError, setFormError] = React.useState<string | null>(null);
+  // ---------------- FROM ----------------
+  const [openFrom, setOpenFrom] = React.useState(false);
+  const [searchKeyword, setSearchKeyword] = React.useState("");
+  const [fromOptions, setFromOptions] = React.useState<Airport[]>([]);
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  const [fromSearchText, setFromSearchText] = React.useState<Airport>({
+    id: 1078,
+    airportCode: "DAC",
+    airportName: "Hazrat Shahjalal Intl Arpt",
+    cityName: "Dhaka",
+    cityCode: "DAC",
+    countryName: "Bangladesh",
+    countryCode: "BD",
+  });
 
-    if (origin === destination) {
-      setFormError("Origin and destination cannot be the same airport.");
+  // ---------------- TO ----------------
+  const [openTo, setOpenTo] = React.useState(false);
+  const [toKeyword, setToKeyword] = React.useState("");
+  const [toOptions, setToOptions] = React.useState<Airport[]>([]);
+  const [toSearchText, setToSearchText] = React.useState<Airport>({
+    id: 1848,
+    airportCode: "DXB",
+    airportName: "Dubai Intl Arpt",
+    cityName: "Dubai",
+    cityCode: "DXB",
+    countryName: "United Arab Emirates",
+    countryCode: "AE",
+  });
+
+  // ---------------- OTHER ----------------
+  const [openJourneyDate, setOpenJourneyDate] = React.useState(false);
+  const [date, setDate] = React.useState<Date>(new Date());
+  const [passengers, setPassengers] = React.useState(1);
+  const [error, setError] = React.useState<string | null>(null);
+
+  // ---------------- API ----------------
+  const fetchAirports = async (query: string, type: "from" | "to") => {
+    if (!query || query.length < 2) return;
+
+    const res = await fetch(
+      `http://72.60.42.249:112/airports/search?searchInput=${query}`,
+    );
+
+    const data = await res.json();
+
+    const airports: Airport[] = data?.payload || [];
+
+    if (type === "from") setFromOptions(airports);
+    else setToOptions(airports);
+  };
+
+  // ---------------- SUBMIT ----------------
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!fromSearchText || !toSearchText) {
+      setError("Select origin and destination");
       return;
     }
-    if (!date) {
-      setFormError("Please choose a departure date.");
+
+    if (fromSearchText.cityCode === toSearchText.cityCode) {
+      setError("Cannot choose same place!");
       return;
     }
-
-    setFormError(null);
 
     const params = new URLSearchParams({
-      origin,
-      destination,
-      date,
+      origin: fromSearchText.cityCode,
+      destination: toSearchText.cityCode,
+      date: moment(date).format("YYYY-MM-DD"),
       passengers: String(passengers),
     });
+
     router.push(`/search?${params.toString()}`);
-  }
+  };
+
+  const handleClickAway = () => {
+    setOpenFrom(false);
+    setOpenTo(false);
+    setOpenJourneyDate(false);
+  };
 
   return (
-    <Paper
-      elevation={compact ? 1 : 3}
-      sx={{ p: { xs: 2, sm: 3 }, borderRadius: 3 }}
-    >
-      <Box
-        component="form"
-        onSubmit={handleSubmit}
-        noValidate
-        aria-label="Flight search"
-      >
+    <ClickAwayListener onClickAway={handleClickAway}>
+      <Box component="form" onSubmit={handleSubmit}>
         <Grid container spacing={2} alignItems="flex-end">
-          <Grid item xs={12} sm={6} md={3}>
-            <TextField
-              select
-              fullWidth
-              id="origin"
-              label="From"
-              value={origin}
-              onChange={(e) => setOrigin(e.target.value)}
-            >
-              {AIRPORTS.map((airport) => (
-                <MenuItem key={airport.code} value={airport.code}>
-                  {airport.city} ({airport.code})
-                </MenuItem>
-              ))}
-            </TextField>
+          {/* ---------------- FROM ---------------- */}
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={3}
+            onClick={(e) => {
+              e.stopPropagation();
+              setOpenFrom((p) => !p);
+              setOpenTo(false);
+            }}
+            className="flight-from-grid"
+          >
+            <Box className="flight-from-box">
+              {/* INPUT */}
+              {openFrom && (
+                <Box className="flight-input-wrapper">
+                  <input
+                    autoFocus
+                    autoComplete="off"
+                    value={searchKeyword}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setSearchKeyword(val);
+                      fetchAirports(val, "from");
+                    }}
+                    placeholder="Search airport..."
+                    className="flight-input"
+                  />
+                </Box>
+              )}
+
+              {/* SELECTED */}
+              {!openFrom && fromSearchText && (
+                <Box className="flight-location-info">
+                  <Typography sx={{ fontSize: "12px", color: "#757F89" }}>
+                    From
+                  </Typography>
+
+                  <Typography className="flight-city">
+                    {fromSearchText.cityName} ({fromSearchText.airportCode})
+                  </Typography>
+
+                  <Typography className="flight-airport">
+                    {fromSearchText.airportCode}, {fromSearchText.airportName}
+                  </Typography>
+                </Box>
+              )}
+
+              {openFrom && (
+                <Box className="flight-dropdown-panel">
+                  <AirportListsCard
+                    airportData={fromOptions}
+                    getSuggestedText={(item: Airport) => {
+                      setFromSearchText(item);
+                      setOpenFrom(false);
+                    }}
+                  />
+                </Box>
+              )}
+            </Box>
           </Grid>
 
-          <Grid item xs={12} sm={6} md={3}>
-            <TextField
-              select
-              fullWidth
-              id="destination"
-              label="To"
-              value={destination}
-              onChange={(e) => setDestination(e.target.value)}
-            >
-              {AIRPORTS.map((airport) => (
-                <MenuItem key={airport.code} value={airport.code}>
-                  {airport.city} ({airport.code})
-                </MenuItem>
-              ))}
-            </TextField>
+          {/* ---------------- TO ---------------- */}
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={3}
+            onClick={(e) => {
+              e.stopPropagation();
+              setOpenTo((p) => !p);
+              setOpenFrom(false);
+            }}
+          >
+            <Box className="flight-from-box">
+              {openTo && (
+                <Box className="flight-input-wrapper">
+                  <input
+                    autoFocus
+                    autoComplete="off"
+                    value={toKeyword}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setToKeyword(val);
+                      fetchAirports(val, "to");
+                    }}
+                    placeholder="Search airport..."
+                    className="flight-input"
+                  />
+                </Box>
+              )}
+
+              {!openTo && toSearchText && (
+                <Box className="flight-location-info">
+                  <Typography sx={{ fontSize: "12px", color: "#757F89" }}>
+                    To
+                  </Typography>
+
+                  <Typography className="flight-city">
+                    {toSearchText.cityName} ({toSearchText.airportCode})
+                  </Typography>
+
+                  <Typography className="flight-airport">
+                    {toSearchText.airportCode}, {toSearchText.airportName}
+                  </Typography>
+                </Box>
+              )}
+
+              {openTo && (
+                <Box className="flight-dropdown-panel">
+                  <AirportListsCard
+                    airportData={toOptions}
+                    getSuggestedText={(item: Airport) => {
+                      setToSearchText(item);
+                      setOpenTo(false);
+                    }}
+                  />
+                </Box>
+              )}
+            </Box>
           </Grid>
 
-          <Grid item xs={12} sm={6} md={3}>
-            <TextField
-              fullWidth
-              id="departure-date"
-              label="Departure date"
-              type="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              InputLabelProps={{ shrink: true }}
-            />
+          {/* ---------------- DATE ---------------- */}
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={3}
+            onClick={(e) => {
+              setOpenJourneyDate((prev) => !prev);
+              setOpenFrom(false);
+              setOpenTo(false);
+            }}
+          >
+            <Box className="flight-from-box">
+              <Box className="flight-location-info">
+                <Typography sx={{ fontSize: "12px", color: "#757F89" }}>
+                  Departure
+                </Typography>
+
+                <Typography className="flight-city">
+                  {new Date(date).toLocaleDateString("en-GB", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                  })}
+                </Typography>
+
+                <Typography className="flight-airport">
+                  Select journey date
+                </Typography>
+              </Box>
+
+              {openJourneyDate && (
+                <Box onClick={(e) => e.stopPropagation()}>
+                  <Calendar
+                    className="dashboard-calendar"
+                    color="#5C0731"
+                    date={date}
+                    direction="horizontal"
+                    minDate={new Date()}
+                    onChange={(item: any) => {
+                      setDate(item);
+                      setOpenJourneyDate(false);
+                    }}
+                  />
+                </Box>
+              )}
+            </Box>
           </Grid>
 
+          {/* ---------------- PASSENGERS ---------------- */}
           <Grid item xs={12} sm={6} md={2}>
             <TextField
               select
               fullWidth
-              id="passengers"
-              label="Passengers"
               value={passengers}
               onChange={(e) => setPassengers(Number(e.target.value))}
+              SelectProps={{ native: true }}
             >
-              {Array.from({ length: 9 }, (_, i) => i + 1).map((count) => (
-                <MenuItem key={count} value={count}>
-                  {count} {count === 1 ? "passenger" : "passengers"}
-                </MenuItem>
+              {Array.from({ length: 9 }, (_, i) => i + 1).map((n) => (
+                <option key={n} value={n}>
+                  {n}
+                </option>
               ))}
             </TextField>
           </Grid>
 
+          {/* ---------------- BUTTON ---------------- */}
           <Grid item xs={12} md={1}>
             <Button
               type="submit"
               variant="contained"
-              color="secondary"
               fullWidth
-              size="large"
               startIcon={<SearchIcon />}
-              aria-label="Search flights"
               sx={{ height: "56px" }}
             >
-              {compact ? "" : "Search"}
+              Search
             </Button>
           </Grid>
         </Grid>
 
-        {formError && (
-          <Box
-            role="alert"
-            sx={{ color: "error.main", mt: 2, fontSize: "0.9rem" }}
-          >
-            {formError}
-          </Box>
-        )}
+        {/* ---------------- ERROR ---------------- */}
+        {error && <Box sx={{ color: "red", mt: 2 }}>{error}</Box>}
       </Box>
-    </Paper>
+    </ClickAwayListener>
   );
 }

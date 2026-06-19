@@ -71,3 +71,5 @@ export interface FlightSearchResponse {
 export interface ApiErrorResponse {
   error: string;
 }
+
+
