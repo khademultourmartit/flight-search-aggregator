@@ -33,7 +33,7 @@ const RegisterForm = () => {
     >
       <Box className="auth-card">
         <h1 className="auth-title">Create your account</h1>
-        <p className="auth-subtitle">Sign up to continue</p>
+        <p className="auth-subtitle">Sign up to continue </p>
 
         <form onSubmit={handleSubmit}>
           <input
