@@ -3,7 +3,7 @@
     "id": "FL0001",
     "airline": "Emirates",
     "airlineCode": "EK",
-    "flightNumber": "EK585",
+    "flightNumber": "585",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -19,13 +19,14 @@
     "cabinClass": "Economy",
     "seatsAvailable": 3,
     "baggageAllowanceKg": 30,
-    "refundable": false
+    "refundable": false,
+    "instantTicketIssueRequired": true
   },
   {
     "id": "FL0002",
     "airline": "flydubai",
     "airlineCode": "FZ",
-    "flightNumber": "FZ411",
+    "flightNumber": "411",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -41,13 +42,14 @@
     "cabinClass": "Economy",
     "seatsAvailable": 4,
     "baggageAllowanceKg": 30,
-    "refundable": false
+    "refundable": false,
+    "instantTicketIssueRequired": false
   },
   {
     "id": "FL0003",
     "airline": "Biman Bangladesh Airlines",
     "airlineCode": "BG",
-    "flightNumber": "BG48",
+    "flightNumber": "48",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -69,7 +71,7 @@
     "id": "FL0004",
     "airline": "US-Bangla Airlines",
     "airlineCode": "BS",
-    "flightNumber": "BS211",
+    "flightNumber": "211",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -91,7 +93,7 @@
     "id": "FL0005",
     "airline": "Oman Air",
     "airlineCode": "WY",
-    "flightNumber": "WY318",
+    "flightNumber": "318",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -111,13 +113,14 @@
     "cabinClass": "Business",
     "seatsAvailable": 7,
     "baggageAllowanceKg": 30,
-    "refundable": false
+    "refundable": false,
+    "instantTicketIssueRequired": false
   },
   {
     "id": "FL0006",
     "airline": "Qatar Airways",
     "airlineCode": "QR",
-    "flightNumber": "QR638",
+    "flightNumber": "638",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -137,13 +140,14 @@
     "cabinClass": "Economy",
     "seatsAvailable": 1,
     "baggageAllowanceKg": 20,
-    "refundable": false
+    "refundable": false,
+    "instantTicketIssueRequired": true
   },
   {
     "id": "FL0007",
     "airline": "Etihad Airways",
     "airlineCode": "EY",
-    "flightNumber": "EY265",
+    "flightNumber": "265",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -163,13 +167,14 @@
     "cabinClass": "Economy",
     "seatsAvailable": 6,
     "baggageAllowanceKg": 30,
-    "refundable": true
+    "refundable": true,
+    "instantTicketIssueRequired": false
   },
   {
     "id": "FL0008",
     "airline": "Emirates",
     "airlineCode": "EK",
-    "flightNumber": "EK587",
+    "flightNumber": "587",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -185,13 +190,14 @@
     "cabinClass": "Economy",
     "seatsAvailable": 9,
     "baggageAllowanceKg": 23,
-    "refundable": true
+    "refundable": true,
+    "instantTicketIssueRequired": false
   },
   {
     "id": "FL0009",
     "airline": "flydubai",
     "airlineCode": "FZ",
-    "flightNumber": "FZ413",
+    "flightNumber": "413",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -207,13 +213,14 @@
     "cabinClass": "Economy",
     "seatsAvailable": 4,
     "baggageAllowanceKg": 23,
-    "refundable": false
+    "refundable": false,
+    "instantTicketIssueRequired": false
   },
   {
     "id": "FL0010",
     "airline": "Biman Bangladesh Airlines",
     "airlineCode": "BG",
-    "flightNumber": "BG50",
+    "flightNumber": "50",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -229,13 +236,14 @@
     "cabinClass": "Economy",
     "seatsAvailable": 4,
     "baggageAllowanceKg": 30,
-    "refundable": true
+    "refundable": true,
+    "instantTicketIssueRequired": false
   },
   {
     "id": "FL0011",
     "airline": "US-Bangla Airlines",
     "airlineCode": "BS",
-    "flightNumber": "BS214",
+    "flightNumber": "214",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -251,13 +259,14 @@
     "cabinClass": "Economy",
     "seatsAvailable": 7,
     "baggageAllowanceKg": 20,
-    "refundable": true
+    "refundable": true,
+    "instantTicketIssueRequired": false
   },
   {
     "id": "FL0012",
     "airline": "Oman Air",
     "airlineCode": "WY",
-    "flightNumber": "WY320",
+    "flightNumber": "320",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -277,13 +286,14 @@
     "cabinClass": "Economy",
     "seatsAvailable": 1,
     "baggageAllowanceKg": 20,
-    "refundable": true
+    "refundable": true,
+    "instantTicketIssueRequired": false
   },
   {
     "id": "FL0013",
     "airline": "Qatar Airways",
     "airlineCode": "QR",
-    "flightNumber": "QR641",
+    "flightNumber": "641",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -303,13 +313,14 @@
     "cabinClass": "Economy",
     "seatsAvailable": 7,
     "baggageAllowanceKg": 23,
-    "refundable": false
+    "refundable": false,
+    "instantTicketIssueRequired": false
   },
   {
     "id": "FL0014",
     "airline": "Etihad Airways",
     "airlineCode": "EY",
-    "flightNumber": "EY267",
+    "flightNumber": "7667",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -329,13 +340,14 @@
     "cabinClass": "Economy",
     "seatsAvailable": 6,
     "baggageAllowanceKg": 23,
-    "refundable": false
+    "refundable": false,
+    "instantTicketIssueRequired": false
   },
   {
     "id": "FL0015",
     "airline": "flydubai",
     "airlineCode": "FZ",
-    "flightNumber": "FZ415",
+    "flightNumber": "543",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -351,13 +363,14 @@
     "cabinClass": "Economy",
     "seatsAvailable": 9,
     "baggageAllowanceKg": 23,
-    "refundable": false
+    "refundable": false,
+    "instantTicketIssueRequired": false
   },
   {
     "id": "FL0016",
     "airline": "Biman Bangladesh Airlines",
     "airlineCode": "BG",
-    "flightNumber": "BG51",
+    "flightNumber": "344",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -373,13 +386,14 @@
     "cabinClass": "Economy",
     "seatsAvailable": 9,
     "baggageAllowanceKg": 20,
-    "refundable": false
+    "refundable": false,
+    "instantTicketIssueRequired": false
   },
   {
     "id": "FL0017",
     "airline": "US-Bangla Airlines",
     "airlineCode": "BS",
-    "flightNumber": "BS216",
+    "flightNumber": "6454",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -395,13 +409,14 @@
     "cabinClass": "Economy",
     "seatsAvailable": 5,
     "baggageAllowanceKg": 30,
-    "refundable": true
+    "refundable": true,
+    "instantTicketIssueRequired": false
   },
   {
     "id": "FL0018",
     "airline": "Oman Air",
     "airlineCode": "WY",
-    "flightNumber": "WY322",
+    "flightNumber": "453",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -421,13 +436,14 @@
     "cabinClass": "Economy",
     "seatsAvailable": 9,
     "baggageAllowanceKg": 23,
-    "refundable": true
+    "refundable": true,
+    "instantTicketIssueRequired": false
   },
   {
     "id": "FL0019",
     "airline": "Qatar Airways",
     "airlineCode": "QR",
-    "flightNumber": "QR643",
+    "flightNumber": "767",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -447,13 +463,14 @@
     "cabinClass": "Economy",
     "seatsAvailable": 4,
     "baggageAllowanceKg": 30,
-    "refundable": false
+    "refundable": false,
+    "instantTicketIssueRequired": false
   },
   {
     "id": "FL0020",
     "airline": "Etihad Airways",
     "airlineCode": "EY",
-    "flightNumber": "EY269",
+    "flightNumber": "344",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -473,13 +490,14 @@
     "cabinClass": "Economy",
     "seatsAvailable": 8,
     "baggageAllowanceKg": 20,
-    "refundable": false
+    "refundable": false,
+    "instantTicketIssueRequired": false
   },
   {
     "id": "FL0021",
     "airline": "Emirates",
     "airlineCode": "EK",
-    "flightNumber": "EK591",
+    "flightNumber": "766",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -495,13 +513,14 @@
     "cabinClass": "Business",
     "seatsAvailable": 4,
     "baggageAllowanceKg": 30,
-    "refundable": true
+    "refundable": true,
+    "instantTicketIssueRequired": false
   },
   {
     "id": "FL0022",
     "airline": "US-Bangla Airlines",
     "airlineCode": "BS",
-    "flightNumber": "BS218",
+    "flightNumber": "756",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -517,13 +536,14 @@
     "cabinClass": "Economy",
     "seatsAvailable": 4,
     "baggageAllowanceKg": 30,
-    "refundable": false
+    "refundable": false,
+    "instantTicketIssueRequired": false
   },
   {
     "id": "FL0023",
     "airline": "Oman Air",
     "airlineCode": "WY",
-    "flightNumber": "WY325",
+    "flightNumber": "865",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -543,13 +563,14 @@
     "cabinClass": "Economy",
     "seatsAvailable": 4,
     "baggageAllowanceKg": 23,
-    "refundable": false
+    "refundable": false,
+    "instantTicketIssueRequired": true
   },
   {
     "id": "FL0024",
     "airline": "Qatar Airways",
     "airlineCode": "QR",
-    "flightNumber": "QR644",
+    "flightNumber": "344",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -569,13 +590,14 @@
     "cabinClass": "Economy",
     "seatsAvailable": 1,
     "baggageAllowanceKg": 20,
-    "refundable": true
+    "refundable": true,
+    "instantTicketIssueRequired": true
   },
   {
     "id": "FL0025",
     "airline": "Etihad Airways",
     "airlineCode": "EY",
-    "flightNumber": "EY270",
+    "flightNumber": "234",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -595,13 +617,14 @@
     "cabinClass": "Economy",
     "seatsAvailable": 7,
     "baggageAllowanceKg": 20,
-    "refundable": false
+    "refundable": false,
+    "instantTicketIssueRequired": true
   },
   {
     "id": "FL0026",
     "airline": "Emirates",
     "airlineCode": "EK",
-    "flightNumber": "EK593",
+    "flightNumber": "565",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -617,13 +640,14 @@
     "cabinClass": "Economy",
     "seatsAvailable": 2,
     "baggageAllowanceKg": 20,
-    "refundable": false
+    "refundable": false,
+    "instantTicketIssueRequired": false
   },
   {
     "id": "FL0027",
     "airline": "flydubai",
     "airlineCode": "FZ",
-    "flightNumber": "FZ419",
+    "flightNumber": "434",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -639,13 +663,14 @@
     "cabinClass": "Economy",
     "seatsAvailable": 3,
     "baggageAllowanceKg": 23,
-    "refundable": false
+    "refundable": false,
+    "instantTicketIssueRequired": false
   },
   {
     "id": "FL0028",
     "airline": "Biman Bangladesh Airlines",
     "airlineCode": "BG",
-    "flightNumber": "BG56",
+    "flightNumber": "564",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -661,13 +686,14 @@
     "cabinClass": "Economy",
     "seatsAvailable": 3,
     "baggageAllowanceKg": 20,
-    "refundable": true
+    "refundable": true,
+    "instantTicketIssueRequired": true
   },
   {
     "id": "FL0029",
     "airline": "US-Bangla Airlines",
     "airlineCode": "BS",
-    "flightNumber": "BS219",
+    "flightNumber": "534",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -683,13 +709,14 @@
     "cabinClass": "Economy",
     "seatsAvailable": 8,
     "baggageAllowanceKg": 20,
-    "refundable": false
+    "refundable": false,
+    "instantTicketIssueRequired": false
   },
   {
     "id": "FL0030",
     "airline": "Qatar Airways",
     "airlineCode": "QR",
-    "flightNumber": "QR646",
+    "flightNumber": "456",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -709,13 +736,14 @@
     "cabinClass": "Economy",
     "seatsAvailable": 4,
     "baggageAllowanceKg": 30,
-    "refundable": false
+    "refundable": false,
+    "instantTicketIssueRequired": false
   },
   {
     "id": "FL0031",
     "airline": "Etihad Airways",
     "airlineCode": "EY",
-    "flightNumber": "EY273",
+    "flightNumber": "645",
     "origin": "DAC",
     "originCity": "Dhaka",
     "destination": "DXB",
@@ -735,6 +763,7 @@
     "cabinClass": "Economy",
     "seatsAvailable": 9,
     "baggageAllowanceKg": 30,
-    "refundable": true
+    "refundable": true,
+    "instantTicketIssueRequired": true
   }
 ]

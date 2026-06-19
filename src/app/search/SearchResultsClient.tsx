@@ -152,61 +152,63 @@ export default function SearchResultsClient() {
   }, [state, filters, sort]);
 
   return (
-    <Container maxWidth="lg" sx={{ py: { xs: 3, md: 5 } }}>
-      <Box sx={{ mb: 3 }}>
-        <FlightSearchBox
-        //  compact
-        // initialValues={{
-        //   origin,
-        //   destination,
-        //   date,
-        //   passengers: Number(passengers),
-        // }}
-        />
-      </Box>
+    <Box pb={5}>
+      <Container maxWidth="xl" >
+        <Box sx={{ mb: 3 }}>
+          <FlightSearchBox
+          //  compact
+          // initialValues={{
+          //   origin,
+          //   destination,
+          //   date,
+          //   passengers: Number(passengers),
+          // }}
+          />
+        </Box>
 
-      {state.status === "loading" && <LoadingState />}
+        {state.status === "loading" && <LoadingState />}
 
-      {state.status === "error" && (
-        <ErrorState message={state.message} onRetry={fetchFlights} />
-      )}
+        {state.status === "error" && (
+          <ErrorState message={state.message} onRetry={fetchFlights} />
+        )}
 
-      {state.status === "success" && state.flights.length === 0 && (
-        <EmptyState origin={origin} destination={destination} date={date} />
-      )}
+        {state.status === "success" && state.flights.length === 0 && (
+          <EmptyState origin={origin} destination={destination} date={date} />
+        )}
 
-      {state.status === "success" && state.flights.length > 0 && (
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={3}>
-            <FlightFilters
-              airlines={airlines}
-              filters={filters}
-              onFiltersChange={setFilters}
-              sort={sort}
-              onSortChange={setSort}
-              resultCount={visibleFlights.length}
-            />
+        {state.status === "success" && state.flights.length > 0 && (
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={3}>
+              <FlightFilters
+                airlines={airlines}
+                filters={filters}
+                onFiltersChange={setFilters}
+                sort={sort}
+                onSortChange={setSort}
+                resultCount={visibleFlights.length}
+              />
+            </Grid>
+            <Grid item xs={12} md={9}>
+              <Stack spacing={2}>
+                {visibleFlights.map((flight) => (
+                  <FlightCard
+                    key={flight.id}
+                    flight={flight}
+                    passengers={Number(passengers)}
+                  />
+                ))}
+                {visibleFlights.length === 0 && (
+                  <Box
+                    sx={{ textAlign: "center", py: 6, color: "text.secondary" }}
+                  >
+                    No flights match the selected filters.
+                  </Box>
+                )}
+              </Stack>
+            </Grid>
           </Grid>
-          <Grid item xs={12} md={9}>
-            <Stack spacing={2}>
-              {visibleFlights.map((flight) => (
-                <FlightCard
-                  key={flight.id}
-                  flight={flight}
-                  passengers={Number(passengers)}
-                />
-              ))}
-              {visibleFlights.length === 0 && (
-                <Box
-                  sx={{ textAlign: "center", py: 6, color: "text.secondary" }}
-                >
-                  No flights match the selected filters.
-                </Box>
-              )}
-            </Stack>
-          </Grid>
-        </Grid>
-      )}
-    </Container>
+        )}
+      </Container>
+    </Box>
   );
 }

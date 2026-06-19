@@ -1,0 +1,280 @@
+@import "../../scss/variables.scss";
+
+
+
+.flight-search-card {
+    background: #fff;
+    padding: 5px;
+    border-radius: 0px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.flight-name {
+    font-family: $theme-font !important;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+    color: $wl-text-color;
+}
+
+.flight-code {
+    font-family: $theme-font !important;
+    font-weight: 500 !important;
+    font-size: 11px !important;
+    color: $wl-secondary-text-color;
+    padding-top: 2px;
+}
+
+.search-flight-time {
+    font-family: $theme-font !important;
+    font-weight: 600 !important;
+    font-size: 18px !important;
+    color: $wl-text-color;
+}
+
+.flight-city-name {
+    font-family: $theme-font !important;
+    font-weight: 500 !important;
+    font-size: 12px !important;
+    color: $wl-secondary-text-color;
+}
+
+/* HEADER */
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+
+    .timeline-date-left,
+    .timeline-date-right {
+        font-size: 12px;
+        color: #333;
+    }
+
+    .timeline-stop {
+        font-size: 12px;
+        font-weight: 600;
+        color: #925a76;
+    }
+}
+
+/* LINE */
+.flight-timeline-line {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 2px;
+    border-top: 1px dashed #d6cbd3;
+    margin: 8px 0;
+}
+
+/* DOTS */
+.timeline-dot {
+    width: 6px;
+    height: 6px;
+    background: #925a76;
+    border-radius: 50%;
+    position: relative;
+    top: -2px; // align center with line
+
+    &.start {
+        background: #925a76;
+    }
+
+    &.middle {
+        background: #b89aa9;
+    }
+}
+
+/* ARROW */
+.timeline-arrow {
+    width: 0;
+    height: 0;
+    border-left: 7px solid #8b3a62;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    position: relative;
+    top: -2px;
+}
+
+/* LAYOVER */
+.timeline-layover {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6px;
+
+    .layover-item {
+        flex: 1;
+        text-align: center;
+    }
+
+    .layover-text {
+        width: 100%;
+        font-size: 11px;
+        color: #555;
+        text-align: center;
+    }
+}
+
+
+.price-card {
+    background: #f8f1f5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    padding: 8px;
+    height: 100% !important;
+}
+
+.flight-price {
+    color: $wl-primary-button-color !important;
+    font-family: $theme-font !important;
+    font-weight: 600 !important;
+    font-size: 18px !important;
+    text-align: right;
+}
+
+.flight-book-button {
+    background: $wl-primary-button-color !important;
+    color: #fff !important;
+    border-radius: 0px !important;
+    padding: 12px 28px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: $theme-font !important;
+    font-weight: 500 !important;
+    font-size: 12px !important;
+}
+
+.refund-btn {
+    border: none;
+    background-color: transparent;
+}
+
+.paritially-refund-btn {
+    position: relative;
+    padding-left: 13px;
+    color: $wl-success-color;
+    font-size: 12px;
+
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: $wl-success-color;
+    }
+
+    @media (max-width: 600px) {
+        font-size: 10px;
+    }
+}
+
+
+.non-refundable {
+    position: relative;
+    padding-left: 13px;
+    color: $wl-danger-color;
+    font-size: 12px;
+
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: $wl-danger-color;
+    }
+
+    @media (max-width: 600px) {
+        font-size: 10px;
+    }
+}
+
+
+.flight-BookHold-btn {
+    border: none;
+    background-color: transparent;
+}
+
+.flight-BookHold {
+    border: none;
+    color: #1461d6;
+    font-size: 13px !important;
+    font-family: $theme-font !important;
+
+    position: relative;
+    padding-left: 12px;
+    font-size: 12px;
+
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: #1461d6;
+    }
+
+    @media (max-width: 600px) {
+        font-size: 10px;
+    }
+}
+
+
+
+.flight-instantBooking {
+    border: none;
+    color: $wl-danger-color;
+    font-size: 13px !important;
+    font-family: $theme-font !important;
+
+    position: relative;
+    padding-left: 12px;
+    font-size: 12px;
+
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: $wl-danger-color;
+    }
+
+    @media (max-width: 600px) {
+        font-size: 10px;
+    }
+}
+
+
+
+.flightSeat-btn {
+    border: none;
+    color: $wl-text-color;
+    background-color: #ffffff;
+    padding: 2px 10px;
+    font-size: 10px !important;
+    font-family: $theme-font !important;
+    border-radius: 3px;
+    display: flex !important;
+    align-items: center !important;
+}

@@ -23,7 +23,9 @@ export interface Flight {
   seatsAvailable: number;
   baggageAllowanceKg: number;
   refundable: boolean;
+  instantTicketIssueRequired: boolean;
 }
+
 
 export interface FlightSearchParams {
   origin: string;
