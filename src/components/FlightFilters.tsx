@@ -11,7 +11,7 @@ import Radio from "@mui/material/Radio";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Divider from "@mui/material/Divider";
-import "../scss/FlightFilter/FlightFilter.scss";
+import "../scss/flight-filter/flight-filter.scss";
 import type {
   FlightFiltersState,
   SortOption,

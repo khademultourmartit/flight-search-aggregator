@@ -5,13 +5,17 @@ import Grid from "@mui/material/Grid";
 import { getFlightById } from "@/lib/flights";
 import FlightSummaryCard from "@/components/FlightSummaryCard";
 import BookingForm from "@/components/BookingForm";
+import "../../../scss/flight-booking/flight-booking.scss";
 
 interface BookingPageProps {
   params: { flightId: string };
   searchParams: { passengers?: string };
 }
 
-export default async function BookingPage({ params, searchParams }: BookingPageProps) {
+export default async function BookingPage({
+  params,
+  searchParams,
+}: BookingPageProps) {
   const flight = await getFlightById(params.flightId);
 
   if (!flight) {
@@ -21,8 +25,8 @@ export default async function BookingPage({ params, searchParams }: BookingPageP
   const passengerCount = Math.max(1, Number(searchParams.passengers) || 1);
 
   return (
-    <Container maxWidth="md" sx={{ py: { xs: 3, md: 5 } }}>
-      <Typography variant="h4" component="h1" sx={{ mb: 3, fontWeight: 700 }}>
+    <Container maxWidth="xl" sx={{ py: { xs: 3, md: 5 } }}>
+      <Typography className="booking-review-title" mb={3}>
         Review and book
       </Typography>
 

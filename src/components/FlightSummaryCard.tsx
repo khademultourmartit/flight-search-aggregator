@@ -4,6 +4,7 @@ import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import Chip from "@mui/material/Chip";
 import type { Flight } from "@/types/flight";
+import "../scss/flight-booking/flight-booking.scss";
 import {
   arrivesNextDay,
   formatDate,
@@ -24,63 +25,82 @@ export default function FlightSummaryCard({ flight }: FlightSummaryCardProps) {
       : `${flight.stops} stop · ${flight.stopAirports.join(", ")}`;
 
   return (
-    <Paper sx={{ p: 3, borderRadius: 2 }} elevation={1}>
+    <Paper sx={{ p: 3 }} elevation={1} className="flight-summary-card">
       <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 0.5 }}>
         {flight.airline} {flight.flightNumber}
       </Typography>
-      <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+      <Typography variant="body2" sx={{ mb: 2 }}>
         {formatDate(flight.departureTime)}
       </Typography>
 
-      <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <div>
-          <Typography variant="h6">{formatTime(flight.departureTime)}</Typography>
-          <Typography variant="caption" color="text.secondary">
+      <Stack direction="row" alignItems="center" className="flight-row">
+        {/* LEFT */}
+        <div className="flight-left">
+          <Typography variant="h6">
+            {formatTime(flight.departureTime)}
+          </Typography>
+          <Typography variant="caption">
             {flight.originCity} ({flight.origin})
           </Typography>
         </div>
-        <Typography variant="body2" color="text.secondary">
-          {formatDuration(flight.durationMinutes)}
-        </Typography>
-        <div style={{ textAlign: "right" }}>
+
+        {/* CENTER */}
+        <div className="flight-center">
+          <Typography variant="body2" className="flight-duration">
+            {formatDuration(flight.durationMinutes)}
+          </Typography>
+
+          <div className="flight-timeline-line">
+            <span className="timeline-dot start" />
+            <span className="timeline-dot end" />
+            <span className="timeline-arrow" />
+          </div>
+        </div>
+
+        {/* RIGHT */}
+        <div className="flight-right">
           <Typography variant="h6">
             {formatTime(flight.arrivalTime)}
             {nextDay ? " +1" : ""}
           </Typography>
-          <Typography variant="caption" color="text.secondary">
+          <Typography variant="caption">
             {flight.destinationCity} ({flight.destination})
           </Typography>
         </div>
       </Stack>
 
-      <Chip size="small" label={stopsLabel} variant="outlined" sx={{ mt: 2 }} />
+      <Chip size="small" label={stopsLabel} className="flight-chip" />
 
       <Divider sx={{ my: 2 }} />
 
       <Stack direction="row" justifyContent="space-between" sx={{ mb: 0.5 }}>
-        <Typography variant="body2" color="text.secondary">
-          Cabin class
-        </Typography>
+        <Typography variant="body2">Cabin class</Typography>
         <Typography variant="body2">{flight.cabinClass}</Typography>
       </Stack>
       <Stack direction="row" justifyContent="space-between" sx={{ mb: 0.5 }}>
-        <Typography variant="body2" color="text.secondary">
-          Checked baggage
-        </Typography>
+        <Typography variant="body2">Checked baggage</Typography>
         <Typography variant="body2">{flight.baggageAllowanceKg} kg</Typography>
       </Stack>
       <Stack direction="row" justifyContent="space-between" sx={{ mb: 2 }}>
-        <Typography variant="body2" color="text.secondary">
-          Refundable
+        <Typography variant="body2">Refundable</Typography>
+        <Typography variant="body2">
+          {flight.refundable ? "Yes" : "No"}
         </Typography>
-        <Typography variant="body2">{flight.refundable ? "Yes" : "No"}</Typography>
       </Stack>
 
       <Divider sx={{ mb: 2 }} />
 
-      <Stack direction="row" justifyContent="space-between" alignItems="baseline">
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="baseline"
+      >
         <Typography variant="subtitle2">Price per passenger</Typography>
-        <Typography variant="h5" color="secondary.dark" sx={{ fontWeight: 700 }}>
+        <Typography
+          variant="h5"
+          color="secondary.dark"
+          sx={{ fontWeight: 700 }}
+        >
           {formatPrice(flight.price, flight.currency)}
         </Typography>
       </Stack>

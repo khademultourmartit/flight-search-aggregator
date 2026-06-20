@@ -8,6 +8,9 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: " Air | Flight Search & Booking",
   description: "Search, compare, and book flights.",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
