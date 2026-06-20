@@ -1,0 +1,65 @@
+@import "../variables.scss";
+
+.footer {
+  margin-top: 25px;
+  font-family: "Public Sans", sans-serif !important;
+  background-color: $wl-footer-bg-color !important;
+  color: #ededfc;
+
+  .footer-first-row {
+    padding: 0 10px;
+  }
+}
+
+/* ROWS */
+.footer-first-row,
+.footer-second-row {
+  padding: 20px 0px !important;
+}
+
+/* TEXT */
+.certificate-title {
+  font-size: 13px !important;
+  white-space: nowrap !important;
+}
+
+.payment-title {
+  font-size: 13px !important;
+}
+
+.copyright,
+.powered-by {
+  font-size: 13px !important;
+}
+
+/* LINKS */
+.footer a {
+  font-size: 13px !important;
+  color: #ededfc !important;
+  text-decoration: none !important;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* DIVIDER */
+.footer span {
+  color: #ededfc !important;
+  opacity: 0.6 !important;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+  .footer-first-row .MuiGrid-container,
+  .footer-second-row .MuiGrid-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+    padding: 20px 0px !important;
+  }
+
+  .footer .MuiStack-root {
+    justify-content: center !important;
+  }
+}

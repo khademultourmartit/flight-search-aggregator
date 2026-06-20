@@ -1,63 +1,120 @@
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
+"use client";
+
+import React from "react";
+import Image from "next/image";
 import Link from "next/link";
+import { Box, Typography, Grid, Stack, Container } from "@mui/material";
 
-export default function Footer() {
-  const year = new Date().getFullYear();
+import logo from "../../public/assests/images/logo.png";
+import "../scss/footer/footer.scss";
 
+const Footer = () => {
   return (
-    <Box
-      component="footer"
-      sx={{
-        bgcolor: "primary.dark",
-        color: "common.white",
-        mt: "auto",
-        py: 4,
-      }}
-    >
-      <Container maxWidth="lg">
-        <Stack
-          direction={{ xs: "column", sm: "row" }}
-          justifyContent="space-between"
-          alignItems={{ xs: "flex-start", sm: "center" }}
-          spacing={2}
-        >
-          <Box>
-            <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-              Air Flight
-            </Typography>
-            <Typography variant="body2" sx={{ opacity: 0.8 }}>
-              A demo flight search and booking experience.
-            </Typography>
-          </Box>
+    <footer className="footer">
+      <Container maxWidth="xl">
+        {/* ================= FIRST ROW ================= */}
+        <Box className="footer-first-row">
+          <Grid container alignItems="center" justifyContent="space-between">
+            {/* LEFT SIDE */}
+            <Grid item xs={12} md={6}>
+              <Stack direction="row" spacing={2} alignItems="center">
+                <Box className="footer-logo-wrapper">
+                  <Link href="/">
+                    <Image src={logo} alt="logo" width={120} height={40} />
+                  </Link>
+                </Box>
 
-          <Stack
-            direction="row"
-            spacing={3}
-            component="nav"
-            aria-label="Footer"
-          >
-            <Link href="/" style={{ color: "inherit", opacity: 0.85 }}>
-              Home
-            </Link>
-            <Link
-              href="/search?origin=DAC&destination=DXB&date=2026-06-19&passengers=1"
-              style={{ color: "inherit", opacity: 0.85 }}
-            >
-              Search
-            </Link>
-          </Stack>
-        </Stack>
+                <Stack spacing={0.5}>
+                  <Typography className="certificate-title">
+                    A sister concern of Flight Air
+                  </Typography>
 
-        <Typography
-          variant="body2"
-          sx={{ opacity: 0.6, mt: 3, textAlign: { xs: "left", sm: "center" } }}
-        >
-          © {year} Air Flight
-        </Typography>
+                  <Typography className="certificate-title">
+                    MoCAT Certificate No: XXXXXXXXX
+                  </Typography>
+                </Stack>
+              </Stack>
+            </Grid>
+
+            {/* RIGHT SIDE */}
+            <Grid item xs={12} md={6}>
+              <Stack
+                direction="row"
+                spacing={2}
+                justifyContent="flex-end"
+                alignItems="center"
+              >
+                <Typography className="payment-title">
+                  Payment Method
+                </Typography>
+
+                <Stack direction="row" spacing={1}>
+                  <Image src="/bank.svg" alt="Bank" width={80} height={50} />
+                  <Image src="/bkash.svg" alt="bKash" width={60} height={50} />
+                  <Image src="/nagad.svg" alt="Nagad" width={60} height={50} />
+                  <Image
+                    src="/rocket.svg"
+                    alt="Rocket"
+                    width={60}
+                    height={50}
+                  />
+                </Stack>
+              </Stack>
+            </Grid>
+          </Grid>
+        </Box>
       </Container>
-    </Box>
+
+      <Box
+        sx={{
+          borderBottom: "2px solid rgba(174, 170, 244, 0.267)",
+        }}
+      ></Box>
+
+      <Container maxWidth="xl">
+        {/* ================= SECOND ROW ================= */}
+        <Box className="footer-second-row">
+          <Grid container alignItems="center" justifyContent="space-between">
+            {/* LEFT SIDE */}
+            <Grid item xs={12} md={6}>
+              <Stack direction="row" spacing={2} alignItems="center">
+                <Typography className="copyright">
+                  © 2025 {process.env.NEXT_PUBLIC_COMPANY_NAME}. All Rights
+                  Reserved
+                </Typography>
+
+                <Typography className="powered-by">
+                  Developed by{" "}
+                  <a href="#" rel="noopener noreferrer">
+                    Flight Air
+                  </a>
+                </Typography>
+              </Stack>
+            </Grid>
+
+            {/* RIGHT SIDE NAV */}
+            <Grid item xs={12} md={6}>
+              <Stack
+                direction="row"
+                spacing={2}
+                justifyContent="flex-end"
+                alignItems="center"
+                flexWrap="wrap"
+              >
+                <Link href="#">Terms & Conditions</Link>
+                <span>|</span>
+                <Link href="#">Privacy Policy</Link>
+                <span>|</span>
+                <Link href="#">Refund Policy</Link>
+                <span>|</span>
+                <Link href="#">Contact Us</Link>
+              </Stack>
+            </Grid>
+          </Grid>
+        </Box>
+      </Container>
+    </footer>
   );
-}
+};
+
+export default Footer;
