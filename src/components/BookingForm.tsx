@@ -9,6 +9,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useBooking } from "@/context/BookingContext";
 import type { Flight, PassengerDetails } from "@/types/flight";
+import { Paper } from "@mui/material";
 
 interface BookingFormProps {
   flight: Flight;
@@ -24,7 +25,10 @@ interface FormErrors {
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_PATTERN = /^[0-9+()\-\s]{7,20}$/;
 
-export default function BookingForm({ flight, passengerCount = 1 }: BookingFormProps) {
+export default function BookingForm({
+  flight,
+  passengerCount = 1,
+}: BookingFormProps) {
   const router = useRouter();
   const { confirmBooking } = useBooking();
 
@@ -77,62 +81,125 @@ export default function BookingForm({ flight, passengerCount = 1 }: BookingFormP
   }
 
   return (
-    <Box component="form" onSubmit={handleSubmit} noValidate aria-label="Passenger details">
-      <Typography variant="h6" component="h2" sx={{ mb: 0.5 }}>
-        Passenger details
-      </Typography>
-      <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-        Booking for {passengerCount} {passengerCount === 1 ? "passenger" : "passengers"}.
-        We&apos;ll use these contact details for the booking confirmation.
-      </Typography>
+    // <Box component="form" onSubmit={handleSubmit} noValidate aria-label="Passenger details">
+    //   <Typography variant="h6" component="h2" sx={{ mb: 0.5 }}>
+    //     Passenger details
+    //   </Typography>
+    //   <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+    //     Booking for {passengerCount} {passengerCount === 1 ? "passenger" : "passengers"}.
+    //     We&apos;ll use these contact details for the booking confirmation.
+    //   </Typography>
 
-      <Stack spacing={2}>
-        <TextField
-          id="fullName"
-          label="Full name"
+    //   <Stack spacing={2}>
+    //     <TextField
+    //       id="fullName"
+    //       label="Full name"
+    //       value={values.fullName}
+    //       onChange={handleChange("fullName")}
+    //       error={Boolean(errors.fullName)}
+    //       helperText={errors.fullName}
+    //       required
+    //       fullWidth
+    //       autoComplete="name"
+    //     />
+    //     <TextField
+    //       id="email"
+    //       label="Email address"
+    //       type="email"
+    //       value={values.email}
+    //       onChange={handleChange("email")}
+    //       error={Boolean(errors.email)}
+    //       helperText={errors.email}
+    //       required
+    //       fullWidth
+    //       autoComplete="email"
+    //     />
+    //     <TextField
+    //       id="phone"
+    //       label="Phone number"
+    //       type="tel"
+    //       value={values.phone}
+    //       onChange={handleChange("phone")}
+    //       error={Boolean(errors.phone)}
+    //       helperText={errors.phone}
+    //       required
+    //       fullWidth
+    //       autoComplete="tel"
+    //     />
+
+    //     <Button
+    //       type="submit"
+    //       variant="contained"
+    //       color="secondary"
+    //       size="large"
+    //       disabled={submitting}
+    //     >
+    //       {submitting ? "Confirming..." : "Confirm booking"}
+    //     </Button>
+    //   </Stack>
+    // </Box>
+
+    <Box
+      component="form"
+      onSubmit={handleSubmit}
+      noValidate
+      className="booking-wrapper"
+    >
+      <div className="booking-card">
+        <p className="booking-title">Passenger details</p>
+
+        <p className="booking-subtitle">
+          Booking for {passengerCount}{" "}
+          {passengerCount === 1 ? "passenger" : "passengers"}. We&apos;ll use
+          these contact details for confirmation.
+        </p>
+
+        {/* FULL NAME */}
+        <input
+          name="fullName"
+          placeholder="Full name"
           value={values.fullName}
           onChange={handleChange("fullName")}
-          error={Boolean(errors.fullName)}
-          helperText={errors.fullName}
-          required
-          fullWidth
-          autoComplete="name"
+          className={`booking-flight-input ${errors.fullName ? "error" : ""}`}
+          autoComplete="one-time-code"
         />
-        <TextField
-          id="email"
-          label="Email address"
+        {errors.fullName && (
+          <div className="booking-error-text">{errors.fullName}</div>
+        )}
+
+        {/* EMAIL */}
+        <input
+          name="email"
           type="email"
+          placeholder="Email address"
           value={values.email}
           onChange={handleChange("email")}
-          error={Boolean(errors.email)}
-          helperText={errors.email}
-          required
-          fullWidth
-          autoComplete="email"
+          className={`booking-flight-input ${errors.email ? "error" : ""}`}
+          autoComplete="one-time-code"
         />
-        <TextField
-          id="phone"
-          label="Phone number"
+        {errors.email && (
+          <div className="booking-error-text">{errors.email}</div>
+        )}
+
+        {/* PHONE */}
+        <input
+          name="phone"
           type="tel"
+          placeholder="Phone number"
           value={values.phone}
           onChange={handleChange("phone")}
-          error={Boolean(errors.phone)}
-          helperText={errors.phone}
-          required
-          fullWidth
-          autoComplete="tel"
+          className={`booking-flight-input ${errors.phone ? "error" : ""}`}
+          autoComplete="one-time-code"
         />
+        {errors.phone && (
+          <div className="booking-error-text">{errors.phone}</div>
+        )}
 
-        <Button
-          type="submit"
-          variant="contained"
-          color="secondary"
-          size="large"
-          disabled={submitting}
-        >
+        {/* BUTTON */}
+        <button className="booking-flight-btn" disabled={submitting}>
           {submitting ? "Confirming..." : "Confirm booking"}
-        </Button>
-      </Stack>
+        </button>
+      </div>
     </Box>
   );
 }

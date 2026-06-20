@@ -42,6 +42,7 @@ const RegisterForm = () => {
             placeholder="Email Address"
             className="auth-input"
             onChange={handleChange}
+            autoComplete="one-time-code"
           />
 
           <input
@@ -50,6 +51,7 @@ const RegisterForm = () => {
             placeholder="Create Password"
             className="auth-input"
             onChange={handleChange}
+            autoComplete="one-time-code"
           />
 
           <input
@@ -58,25 +60,20 @@ const RegisterForm = () => {
             placeholder="Phone Number"
             className="auth-input"
             onChange={handleChange}
+            autoComplete="one-time-code"
           />
 
           <div className="auth-checkbox-row">
             <FormControlLabel
               control={
-                <Checkbox
-                  checked={isUser}
-                  onChange={() => setIsUser(true)}
-                />
+                <Checkbox checked={isUser} onChange={() => setIsUser(true)} />
               }
               label="Customer"
             />
 
             <FormControlLabel
               control={
-                <Checkbox
-                  checked={!isUser}
-                  onChange={() => setIsUser(false)}
-                />
+                <Checkbox checked={!isUser} onChange={() => setIsUser(false)} />
               }
               label="Agent"
             />

@@ -2,12 +2,13 @@
 
 .booking-review-title {
   color: $background-light !important;
-  font-size: 22px !important;
+  font-size: 20px !important;
   font-weight: 500 !important;
   font-family: $theme-font !important;
   background-color: $wl-primary-button-color;
   padding: 5px 10px;
   border-radius: 5px;
+  text-align: center;
 }
 
 .flight-summary-card {
@@ -118,9 +119,8 @@
   flex: 0 0 auto;
 }
 
-/* CENTER (IMPORTANT FIX) */
 .flight-center {
-  flex: 0 0 160px; // FIX WIDTH = stops breaking layout
+  flex: 0 0 160px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -164,4 +164,93 @@
   border-left: 7px solid #925a76;
   border-top: 4px solid transparent;
   border-bottom: 4px solid transparent;
+}
+
+// ------------------------------------------------------- Booking Form style ------------------------------------------
+
+/* WRAPPER */
+.booking-wrapper {
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px !important;
+  padding: 20px;
+}
+
+/* TITLE */
+.booking-title {
+  font-size: 18px;
+  font-weight: 600 !important;
+  color: $wl-primary-text-color;
+  font-family: $theme-font !important;
+  line-height: 0px !important;
+}
+
+.booking-subtitle {
+  font-size: 14px;
+  color: $wl-secondary-text-color;
+  font-family: $theme-font !important;
+}
+
+.booking-flight-input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  border: 1px solid $wl-border-color;
+  border-radius: 5px;
+  font-size: 14px;
+  font-family: $theme-font;
+  outline: none;
+  font-family: $theme-font !important;
+
+  background-color: #fff !important;
+  color: #413755;
+
+  transition: 0.2s ease;
+
+  &:focus {
+    border-color: $wl-border-color;
+  }
+
+  &:hover {
+    background-color: #fff !important;
+  }
+
+  &.error {
+    border-color: #d32f2f !important;
+  }
+}
+
+/* ERROR TEXT */
+.booking-error-text {
+  font-size: 12px;
+  color: #d32f2f;
+  margin-top: -8px;
+  margin-bottom: 10px;
+  font-family: $theme-font !important;
+}
+
+/* BUTTON */
+.booking-flight-btn {
+  width: 100%;
+  padding: 10px;
+  background: $wl-primary-button-color;
+  font-family: $theme-font !important;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+/* OPTIONAL HEADER TEXT */
+.booking-flight-note {
+  font-size: 12px;
+  color: $wl-secondary-text-color;
+  margin-top: 10px;
+  font-family: $theme-font !important;
 }

@@ -36,6 +36,7 @@ const Login = () => {
             placeholder="Email Address"
             className="auth-input"
             onChange={handleChange}
+            autoComplete="one-time-code"
           />
 
           <div className="auth-password-box">
@@ -45,6 +46,7 @@ const Login = () => {
               placeholder="Password"
               className="auth-input"
               onChange={handleChange}
+              autoComplete="one-time-code"
             />
 
             <span onClick={() => setShowPassword(!showPassword)}>
