@@ -32,7 +32,10 @@ interface FlightCardProps {
 
 export default function FlightCard({
   flight,
-  passengers = 1,
+  passengers,
+  adt,
+  chd,
+  inf,
 }: FlightCardProps) {
   const nextDay = arrivesNextDay(flight.departureTime, flight.arrivalTime);
   const stopsLabel =
@@ -316,14 +319,17 @@ export default function FlightCard({
           <Box className="price-card">
             <Box pb={1}>
               <Typography className="flight-price">
-                {formatPrice(flight.price, flight.currency)}
+                {formatPrice(
+                  flight.price * Number(passengers),
+                  flight.currency,
+                )}
               </Typography>
             </Box>
 
             <Button
               className="flight-book-button"
               component={Link}
-              href={`/booking/${flight.id}?passengers=${passengers}`}
+              href={`/booking/${flight.id}?passengers=${passengers}&adt=${adt}&chd=${chd}&inf=${inf}`}
               aria-label={`Select ${flight.airline} flight ${flight.flightNumber}`}
             >
               Book

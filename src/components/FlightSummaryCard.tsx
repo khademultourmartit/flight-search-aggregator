@@ -15,9 +15,13 @@ import {
 
 interface FlightSummaryCardProps {
   flight: Flight;
+  passengerCount: number;
 }
 
-export default function FlightSummaryCard({ flight }: FlightSummaryCardProps) {
+export default function FlightSummaryCard({
+  flight,
+  passengerCount,
+}: FlightSummaryCardProps) {
   const nextDay = arrivesNextDay(flight.departureTime, flight.arrivalTime);
   const stopsLabel =
     flight.stops === 0
@@ -95,13 +99,31 @@ export default function FlightSummaryCard({ flight }: FlightSummaryCardProps) {
         justifyContent="space-between"
         alignItems="baseline"
       >
-        <Typography variant="subtitle2">Price per passenger</Typography>
+        <Typography variant="body2">Price per passenger</Typography>
+        <Typography
+          variant="body2"
+          color="secondary.dark"
+          sx={{ fontWeight: 700 }}
+        >
+          {formatPrice(flight.price, flight.currency)}
+        </Typography>
+      </Stack>
+
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="baseline"
+        mt={1}
+      >
+        <Typography variant="subtitle2">
+          Total Price of {passengerCount} Passenger
+        </Typography>
         <Typography
           variant="h5"
           color="secondary.dark"
           sx={{ fontWeight: 700 }}
         >
-          {formatPrice(flight.price, flight.currency)}
+          {formatPrice(flight.price * Number(passengerCount), flight.currency)}
         </Typography>
       </Stack>
     </Paper>

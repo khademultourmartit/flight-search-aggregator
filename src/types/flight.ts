@@ -26,7 +26,6 @@ export interface Flight {
   instantTicketIssueRequired: boolean;
 }
 
-
 export interface FlightSearchParams {
   origin: string;
   destination: string;
@@ -58,7 +57,7 @@ export interface PassengerDetails {
 export interface Booking {
   bookingReference: string;
   flight: Flight;
-  passenger: PassengerDetails;
+  passengers: PassengerDetails[];
   passengerCount: number;
   bookedAt: string;
 }
@@ -73,5 +72,3 @@ export interface FlightSearchResponse {
 export interface ApiErrorResponse {
   error: string;
 }
-
-

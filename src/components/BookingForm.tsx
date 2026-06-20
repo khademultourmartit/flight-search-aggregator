@@ -3,17 +3,15 @@
 import * as React from "react";
 import { useRouter } from "next/navigation";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 import { useBooking } from "@/context/BookingContext";
 import type { Flight, PassengerDetails } from "@/types/flight";
-import { Paper } from "@mui/material";
 
 interface BookingFormProps {
   flight: Flight;
   passengerCount?: number;
+  adt: number;
+  chd: number;
+  inf: number;
 }
 
 interface FormErrors {
@@ -27,175 +25,156 @@ const PHONE_PATTERN = /^[0-9+()\-\s]{7,20}$/;
 
 export default function BookingForm({
   flight,
-  passengerCount = 1,
+  adt,
+  chd,
+  inf,
 }: BookingFormProps) {
   const router = useRouter();
   const { confirmBooking } = useBooking();
 
-  const [values, setValues] = React.useState<PassengerDetails>({
-    fullName: "",
-    email: "",
-    phone: "",
-  });
-  const [errors, setErrors] = React.useState<FormErrors>({});
+  const totalPassengers = adt + chd + inf;
+
+  const [values, setValues] = React.useState<PassengerDetails[]>(
+    Array.from({ length: totalPassengers }, () => ({
+      fullName: "",
+      email: "",
+      phone: "",
+    })),
+  );
+
+  const [errors, setErrors] = React.useState<Record<number, FormErrors>>({});
   const [submitting, setSubmitting] = React.useState(false);
 
-  function validate(): FormErrors {
-    const next: FormErrors = {};
-    if (!values.fullName.trim()) {
-      next.fullName = "Full name is required.";
-    }
-    if (!values.email.trim()) {
-      next.email = "Email is required.";
-    } else if (!EMAIL_PATTERN.test(values.email.trim())) {
-      next.email = "Enter a valid email address.";
-    }
-    if (!values.phone.trim()) {
-      next.phone = "Phone number is required.";
-    } else if (!PHONE_PATTERN.test(values.phone.trim())) {
-      next.phone = "Enter a valid phone number.";
-    }
+  function validate() {
+    const next: Record<number, FormErrors> = {};
+
+    values.forEach((p, index) => {
+      const err: FormErrors = {};
+
+      if (!p.fullName.trim()) err.fullName = "Full name is required.";
+
+      if (!p.email.trim()) {
+        err.email = "Email is required.";
+      } else if (!EMAIL_PATTERN.test(p.email.trim())) {
+        err.email = "Enter a valid email address.";
+      }
+
+      if (!p.phone.trim()) {
+        err.phone = "Phone number is required.";
+      } else if (!PHONE_PATTERN.test(p.phone.trim())) {
+        err.phone = "Enter a valid phone number.";
+      }
+
+      if (Object.keys(err).length > 0) {
+        next[index] = err;
+      }
+    });
+
     return next;
   }
-
-  function handleChange(field: keyof PassengerDetails) {
+  function handleChange(index: number, field: keyof PassengerDetails) {
     return (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValues((prev) => ({ ...prev, [field]: event.target.value }));
+      const value = event.target.value;
+
+      setValues((prev) => {
+        const copy = [...prev];
+
+        const current = copy[index];
+        if (!current) return prev;
+
+        copy[index] = {
+          ...current,
+          [field]: value,
+        } as PassengerDetails;
+
+        return copy;
+      });
     };
   }
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+
     const validationErrors = validate();
     setErrors(validationErrors);
-    if (Object.keys(validationErrors).length > 0) {
-      return;
-    }
+
+    if (Object.keys(validationErrors).length > 0) return;
 
     setSubmitting(true);
-    // Simulate a brief processing delay, as a real payment/booking call would have.
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    await new Promise((r) => setTimeout(r, 500));
 
-    const booking = confirmBooking(flight, values, passengerCount);
+    const booking = confirmBooking(flight, values, totalPassengers);
+
     router.push(`/confirmation?ref=${booking.bookingReference}`);
   }
 
+  function getPassengerLabel(
+    index: number,
+    adt: number,
+    chd: number,
+    inf: number,
+  ) {
+    if (index < adt) return `Pax ${index + 1} Adult`;
+    if (index < adt + chd) return `Pax ${index + 1} Child`;
+    return `Pax ${index + 1} Infant`;
+  }
+
   return (
-    // <Box component="form" onSubmit={handleSubmit} noValidate aria-label="Passenger details">
-    //   <Typography variant="h6" component="h2" sx={{ mb: 0.5 }}>
-    //     Passenger details
-    //   </Typography>
-    //   <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-    //     Booking for {passengerCount} {passengerCount === 1 ? "passenger" : "passengers"}.
-    //     We&apos;ll use these contact details for the booking confirmation.
-    //   </Typography>
-
-    //   <Stack spacing={2}>
-    //     <TextField
-    //       id="fullName"
-    //       label="Full name"
-    //       value={values.fullName}
-    //       onChange={handleChange("fullName")}
-    //       error={Boolean(errors.fullName)}
-    //       helperText={errors.fullName}
-    //       required
-    //       fullWidth
-    //       autoComplete="name"
-    //     />
-    //     <TextField
-    //       id="email"
-    //       label="Email address"
-    //       type="email"
-    //       value={values.email}
-    //       onChange={handleChange("email")}
-    //       error={Boolean(errors.email)}
-    //       helperText={errors.email}
-    //       required
-    //       fullWidth
-    //       autoComplete="email"
-    //     />
-    //     <TextField
-    //       id="phone"
-    //       label="Phone number"
-    //       type="tel"
-    //       value={values.phone}
-    //       onChange={handleChange("phone")}
-    //       error={Boolean(errors.phone)}
-    //       helperText={errors.phone}
-    //       required
-    //       fullWidth
-    //       autoComplete="tel"
-    //     />
-
-    //     <Button
-    //       type="submit"
-    //       variant="contained"
-    //       color="secondary"
-    //       size="large"
-    //       disabled={submitting}
-    //     >
-    //       {submitting ? "Confirming..." : "Confirm booking"}
-    //     </Button>
-    //   </Stack>
-    // </Box>
-
-    <Box
-      component="form"
-      onSubmit={handleSubmit}
-      noValidate
-      className="booking-wrapper"
-    >
+    <Box component="form" onSubmit={handleSubmit} className="booking-wrapper">
       <div className="booking-card">
         <p className="booking-title">Passenger details</p>
 
-        <p className="booking-subtitle">
-          Booking for {passengerCount}{" "}
-          {passengerCount === 1 ? "passenger" : "passengers"}. We&apos;ll use
-          these contact details for confirmation.
-        </p>
+        <p className="booking-subtitle">Total passengers: {totalPassengers}</p>
 
-        {/* FULL NAME */}
-        <input
-          name="fullName"
-          placeholder="Full name"
-          value={values.fullName}
-          onChange={handleChange("fullName")}
-          className={`booking-flight-input ${errors.fullName ? "error" : ""}`}
-          autoComplete="one-time-code"
-        />
-        {errors.fullName && (
-          <div className="booking-error-text">{errors.fullName}</div>
-        )}
+        {values.map((p, index) => (
+          <div key={index} className="passenger-block">
+            <p className="passenger-title">
+              {getPassengerLabel(index, adt, chd, inf)}
+            </p>
 
-        {/* EMAIL */}
-        <input
-          name="email"
-          type="email"
-          placeholder="Email address"
-          value={values.email}
-          onChange={handleChange("email")}
-          className={`booking-flight-input ${errors.email ? "error" : ""}`}
-          autoComplete="one-time-code"
-        />
-        {errors.email && (
-          <div className="booking-error-text">{errors.email}</div>
-        )}
+            {/* FULL NAME */}
+            <input
+              placeholder="Full name"
+              value={p.fullName}
+              onChange={handleChange(index, "fullName")}
+              className={`booking-flight-input ${
+                errors[index]?.fullName ? "error" : ""
+              }`}
+            />
+            {errors[index]?.fullName && (
+              <div className="booking-error-text">{errors[index].fullName}</div>
+            )}
 
-        {/* PHONE */}
-        <input
-          name="phone"
-          type="tel"
-          placeholder="Phone number"
-          value={values.phone}
-          onChange={handleChange("phone")}
-          className={`booking-flight-input ${errors.phone ? "error" : ""}`}
-          autoComplete="one-time-code"
-        />
-        {errors.phone && (
-          <div className="booking-error-text">{errors.phone}</div>
-        )}
+            {/* EMAIL */}
+            <input
+              type="email"
+              placeholder="Email address"
+              value={p.email}
+              onChange={handleChange(index, "email")}
+              className={`booking-flight-input ${
+                errors[index]?.email ? "error" : ""
+              }`}
+            />
+            {errors[index]?.email && (
+              <div className="booking-error-text">{errors[index].email}</div>
+            )}
 
-        {/* BUTTON */}
+            {/* PHONE */}
+            <input
+              type="tel"
+              placeholder="Phone number"
+              value={p.phone}
+              onChange={handleChange(index, "phone")}
+              className={`booking-flight-input ${
+                errors[index]?.phone ? "error" : ""
+              }`}
+            />
+            {errors[index]?.phone && (
+              <div className="booking-error-text">{errors[index].phone}</div>
+            )}
+          </div>
+        ))}
+
         <button className="booking-flight-btn" disabled={submitting}>
           {submitting ? "Confirming..." : "Confirm booking"}
         </button>

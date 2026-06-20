@@ -15,17 +15,18 @@ const STORAGE_KEY = "ibox-active-booking";
 
 interface BookingContextValue {
   booking: Booking | null;
-  /** Creates and stores a confirmed booking, returning it for convenience. */
+
   confirmBooking: (
     flight: Flight,
-    passenger: PassengerDetails,
-    passengerCount: number
+    passengers: PassengerDetails[],
+    passengerCount: number,
   ) => Booking;
+
   clearBooking: () => void;
 }
 
 const BookingContext = createContext<BookingContextValue | undefined>(
-  undefined
+  undefined,
 );
 
 export function BookingProvider({ children }: { children: React.ReactNode }) {
@@ -45,24 +46,28 @@ export function BookingProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const confirmBooking = useCallback(
-    (flight: Flight, passenger: PassengerDetails, passengerCount: number) => {
+    (
+      flight: Flight,
+      passengers: PassengerDetails[],
+      passengerCount: number,
+    ) => {
       const newBooking: Booking = {
         bookingReference: generateBookingReference(),
         flight,
-        passenger,
+        passengers,
         passengerCount,
         bookedAt: new Date().toISOString(),
       };
+
       setBooking(newBooking);
+
       try {
         sessionStorage.setItem(STORAGE_KEY, JSON.stringify(newBooking));
-      } catch {
-        // sessionStorage unavailable (e.g. private mode) - booking still
-        // works for this session via in-memory state.
-      }
+      } catch {}
+
       return newBooking;
     },
-    []
+    [],
   );
 
   const clearBooking = useCallback(() => {
@@ -76,13 +81,11 @@ export function BookingProvider({ children }: { children: React.ReactNode }) {
 
   const value = useMemo(
     () => ({ booking, confirmBooking, clearBooking }),
-    [booking, confirmBooking, clearBooking]
+    [booking, confirmBooking, clearBooking],
   );
 
   return (
-    <BookingContext.Provider value={value}>
-      {children}
-    </BookingContext.Provider>
+    <BookingContext.Provider value={value}>{children}</BookingContext.Provider>
   );
 }
 
