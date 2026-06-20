@@ -67,17 +67,12 @@ export default function SearchForm() {
   const [passengers, setPassengers] = React.useState({
     adult: 1,
     child: 0,
-    kid: 0,
     infant: 0,
-    infantWithSeat: 0,
   });
 
   const totalPassengers =
-    passengers.adult +
-    passengers.child +
-    passengers.kid +
-    passengers.infant +
-    passengers.infantWithSeat;
+    passengers.adult + passengers.child + passengers.infant;
+
   const [error, setError] = React.useState<string | null>(null);
 
   // ---------------- API ----------------
@@ -126,6 +121,9 @@ export default function SearchForm() {
       destination: toSearchText.cityCode,
       date: moment(date).format("YYYY-MM-DD"),
       passengers: String(totalPassengers),
+      adt: String(passengers?.adult),
+      chd: String(passengers?.child),
+      inf: String(passengers?.infant),
     });
 
     router.push(`/search?${params.toString()}`);
@@ -145,6 +143,12 @@ export default function SearchForm() {
         onSubmit={handleSubmit}
         className="flight-search-box-bgcolor "
       >
+        <Box>
+          <Typography className="search-destination-title">
+            Search Your Destination
+          </Typography>
+        </Box>
+
         <Grid container spacing={2} alignItems="flex-end">
           {/* ---------------- FROM ---------------- */}
           <Grid
@@ -372,7 +376,7 @@ export default function SearchForm() {
           {/* ---------------- BUTTON ---------------- */}
           <Grid item xs={12} md={1}>
             <Button
-            className="flight-search-button"
+              className="flight-search-button"
               type="submit"
               variant="contained"
               fullWidth

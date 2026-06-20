@@ -76,6 +76,9 @@ export default function SearchResultsClient() {
   const destination = searchParams.get("destination") ?? "DXB";
   const date = searchParams.get("date") ?? "2026-06-19";
   const passengers = searchParams.get("passengers") ?? "1";
+  const adt = Number(searchParams.get("adt") ?? "1");
+  const chd = Number(searchParams.get("chd") ?? "0");
+  const inf = Number(searchParams.get("inf") ?? "0");
 
   const [state, setState] = React.useState<RequestState>({ status: "loading" });
   const [sort, setSort] = React.useState<SortOption>("price-asc");
@@ -195,6 +198,9 @@ export default function SearchResultsClient() {
                     key={flight.id}
                     flight={flight}
                     passengers={Number(passengers)}
+                    adt={adt}
+                    chd={chd}
+                    inf={inf}
                   />
                 ))}
                 {visibleFlights.length === 0 && (
