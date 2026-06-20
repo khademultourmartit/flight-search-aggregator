@@ -1,0 +1,83 @@
+@import "../../scss/variables.scss";
+
+.flight-showing {
+  color: $wl-secondary-text-color !important;
+  font-family: $theme-font !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+
+.flight-filters {
+  background: #fff !important;
+  border-radius: 2px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px !important;
+  font-family: $theme-font !important;
+
+  .MuiTypography-root,
+  .MuiFormControlLabel-label,
+  .MuiMenuItem-root,
+  .MuiInputLabel-root,
+  .MuiInputBase-input {
+    font-family: $theme-font !important;
+    font-size: 12px !important;
+    color: $wl-secondary-text-color;
+  }
+
+  .MuiFormControlLabel-label {
+    color: $wl-secondary-text-color !important;
+  }
+
+  // Checkbox
+  .MuiCheckbox-root {
+    color: $wl-secondary-text-color !important;
+
+    &.Mui-checked {
+      color: $wl-primary-button-color !important;
+    }
+  }
+
+  // Radio
+  .MuiRadio-root {
+    color: $wl-secondary-text-color !important;
+
+    &.Mui-checked {
+      color: $wl-primary-button-color !important;
+    }
+  }
+
+  // Select field
+  .MuiOutlinedInput-root {
+    font-family: $theme-font !important;
+    font-size: 12px !important;
+
+    .MuiOutlinedInput-notchedOutline {
+      border-color: $wl-secondary-text-color;
+    }
+
+    &:hover .MuiOutlinedInput-notchedOutline {
+      border-color: $wl-primary-button-color;
+    }
+
+    &.Mui-focused .MuiOutlinedInput-notchedOutline {
+      border-color: $wl-primary-button-color;
+    }
+  }
+
+  .MuiInputLabel-root {
+    color: $wl-secondary-text-color;
+
+    &.Mui-focused {
+      color: $wl-primary-button-color;
+    }
+  }
+
+  .MuiTypography-subtitle2 {
+    font-size: 12px !important;
+    font-weight: 600;
+    color: $wl-primary-button-color;
+  }
+
+  .MuiDivider-root {
+    border-color: rgba(117, 127, 137, 0.2);
+  }
+}

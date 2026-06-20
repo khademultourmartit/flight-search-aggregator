@@ -11,6 +11,7 @@ import Radio from "@mui/material/Radio";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Divider from "@mui/material/Divider";
+import "../scss/FlightFilter/FlightFilter.scss";
 import type {
   FlightFiltersState,
   SortOption,
@@ -54,7 +55,13 @@ export default function FlightFilters({
   }
 
   return (
-    <Paper sx={{ p: 2.5, borderRadius: 2 }} elevation={1}>
+    <Paper className="flight-filters" sx={{ p: 2.5 }} elevation={1}>
+      <Box sx={{ mb: 3 }}>
+        <Typography className="flight-showing">
+          Showing {resultCount} {resultCount === 1 ? "flight" : "flights"}
+        </Typography>
+      </Box>
+
       <TextField
         select
         fullWidth
@@ -63,6 +70,19 @@ export default function FlightFilters({
         value={sort}
         onChange={(e) => onSortChange(e.target.value as SortOption)}
         sx={{ mb: 3 }}
+        SelectProps={{
+          MenuProps: {
+            PaperProps: {
+              sx: {
+                "& .MuiMenuItem-root": {
+                  fontFamily: '"Poppins", sans-serif',
+                  fontSize: "12px",
+                  color: "#222222",
+                },
+              },
+            },
+          },
+        }}
       >
         {SORT_OPTIONS.map((option) => (
           <MenuItem key={option.value} value={option.value}>
@@ -81,9 +101,21 @@ export default function FlightFilters({
         value={filters.stops}
         onChange={(e) => handleStopsChange(e.target.value as StopsFilter)}
       >
-        <FormControlLabel value="any" control={<Radio size="small" />} label="Any" />
-        <FormControlLabel value="nonstop" control={<Radio size="small" />} label="Nonstop" />
-        <FormControlLabel value="1stop" control={<Radio size="small" />} label="1 stop" />
+        <FormControlLabel
+          value="any"
+          control={<Radio size="small" />}
+          label="Any"
+        />
+        <FormControlLabel
+          value="nonstop"
+          control={<Radio size="small" />}
+          label="Nonstop"
+        />
+        <FormControlLabel
+          value="1stop"
+          control={<Radio size="small" />}
+          label="1 stop"
+        />
       </RadioGroup>
 
       <Divider sx={{ my: 2 }} />
@@ -106,12 +138,6 @@ export default function FlightFilters({
           />
         ))}
       </FormGroup>
-
-      <Box sx={{ mt: 3 }}>
-        <Typography variant="caption" color="text.secondary">
-          Showing {resultCount} {resultCount === 1 ? "flight" : "flights"}
-        </Typography>
-      </Box>
     </Paper>
   );
 }

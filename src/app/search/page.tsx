@@ -4,7 +4,7 @@ import SearchResultsClient from "./SearchResultsClient";
 import LoadingState from "@/components/LoadingState";
 
 export const metadata = {
-  title: "Search results | iBox Air",
+  title: "Search results | Flight Air",
 };
 
 export default function SearchPage() {

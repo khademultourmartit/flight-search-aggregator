@@ -153,7 +153,7 @@ export default function SearchResultsClient() {
 
   return (
     <Box pb={5}>
-      <Container maxWidth="xl" >
+      <Container maxWidth="xl">
         <Box sx={{ mb: 3 }}>
           <FlightSearchBox
           //  compact
