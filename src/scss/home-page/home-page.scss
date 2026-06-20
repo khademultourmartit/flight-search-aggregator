@@ -79,3 +79,44 @@
     }
   }
 }
+
+// ----- world explore
+
+.home-page-world-explore {
+  color: $background-light !important;
+  font-size: 40px;
+  font-weight: 600;
+  font-family: $theme-font !important;
+}
+
+.explore-btn {
+  background-color: $background-light;
+  color: $wl-text-color !important;
+  font-family: $theme-font !important;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  &:hover {
+    background-color: $background-light;
+
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.explore-icon {
+  font-size: 20px !important;
+  color: $wl-text-color !important;
+}

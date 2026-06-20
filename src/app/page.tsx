@@ -5,6 +5,7 @@ import SearchForm from "@/components/FlightSearchBox";
 
 import HomeService from "@/components/LandingPage/HomeService";
 import TrustedAirline from "@/components/LandingPage/TrustedAirline";
+import WorldExplore from "@/components/LandingPage/WorldExplore";
 
 export default function HomePage() {
   return (
@@ -24,6 +25,9 @@ export default function HomePage() {
           <TrustedAirline />
         </Box>
       </Container>
+      <Box mt={10}>
+        <WorldExplore />
+      </Box>
     </Box>
   );
 }
