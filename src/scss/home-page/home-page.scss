@@ -1,0 +1,81 @@
+@import "../variables.scss";
+
+.home-service-header {
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  text-align: center;
+  color: $wl-text-color;
+  font-family: $theme-font;
+}
+
+.home-service-section {
+  background: #f2f3f5;
+  padding: 5px;
+
+  .home-service {
+    text-align: center;
+    background-color: $background-light;
+    padding: 10px;
+  }
+  .home-service-title {
+    font-size: 13px !important;
+    font-weight: 600;
+    text-align: center;
+    color: $wl-primary-text-color !important;
+    font-family: $theme-font;
+  }
+}
+
+//  Trusted Airlines style
+
+.trusted-airline-section {
+  background: #f2f3f5;
+  padding: 20px;
+
+  .trusted-airline-title {
+    font-size: 26px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #413755;
+    font-family: "Outfit", sans-serif;
+
+    span {
+      color: #4f47e6;
+    }
+  }
+
+  .trusted-airline-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+    border-radius: 10px;
+    padding: 20px 10px !important;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background: transparent;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+    &:hover {
+      background: $background-light;
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    img {
+      object-fit: contain;
+      filter: brightness(95%);
+    }
+
+    p,
+    .MuiTypography-root {
+      margin-top: 0.5rem;
+      font-family: $theme-font !important;
+      font-size: 14px;
+      font-weight: 500;
+      color: $wl-primary-text-color !important;
+    }
+  }
+}

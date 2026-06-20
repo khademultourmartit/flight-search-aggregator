@@ -2,7 +2,9 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import SearchForm from "@/components/FlightSearchBox";
-import PromoVideo from "@/components/PromoVideo";
+
+import HomeService from "@/components/LandingPage/HomeService";
+import TrustedAirline from "@/components/LandingPage/TrustedAirline";
 
 export default function HomePage() {
   return (
@@ -10,10 +12,18 @@ export default function HomePage() {
       <Container maxWidth="lg"></Container>
 
       <Container maxWidth="xl">
-        <SearchForm />
-      </Container>
+        <Box>
+          <SearchForm />
+        </Box>
 
-      {/* <PromoVideo /> */}
+        <Box mt={5}>
+          <HomeService />
+        </Box>
+
+        <Box mt={5}>
+          <TrustedAirline />
+        </Box>
+      </Container>
     </Box>
   );
 }
