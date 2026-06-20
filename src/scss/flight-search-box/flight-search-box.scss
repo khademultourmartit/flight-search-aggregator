@@ -27,28 +27,8 @@
   position: relative;
 }
 
-.radio-label-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.menu-radio {
-  margin-right: 15px !important;
-}
-
 .icon {
   object-fit: contain;
-}
-
-.flight-search-icon {
-  width: 50px !important;
-  height: 50px !important;
-
-  @media (max-width: 600px) {
-    width: 25px !important;
-    height: 25px !important;
-  }
 }
 
 .flight-from-box {
@@ -107,28 +87,6 @@
   white-space: nowrap;
 }
 
-.flight-class-text {
-  color: #757f89 !important;
-  font-size: 14px !important;
-  font-weight: 700 !important;
-  font-family: $theme-font !important;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  line-height: 18px !important;
-}
-
-.traveler-flight-city {
-  color: $wl-primary-text-color !important;
-  font-size: 11px !important;
-  font-weight: 600 !important;
-  font-family: $theme-font !important;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  padding-top: 5px;
-}
-
 .flight-airport {
   color: $wl-secondary-text-color;
   font-size: 11px !important;
@@ -141,17 +99,6 @@
   white-space: nowrap;
 }
 
-.same-place-wrapper {
-  padding-top: 44px;
-}
-
-.fare-option-text {
-  font-size: 14px !important;
-  color: $wl-primary-text-color !important;
-  font-weight: 500 !important;
-  font-family: "Poppins", sans-serif !important;
-}
-
 .flight-dropdown-panel {
   position: absolute;
   top: 105%;
@@ -161,104 +108,6 @@
   border-radius: 0px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   z-index: 1000;
-}
-
-.flight-takeoff-icon {
-  font-size: 30px !important;
-  color: $wl-primary-button-color;
-}
-
-.reverse-icon-wrapper {
-  display: none;
-
-  @media (min-width: 600px) {
-    display: block;
-  }
-}
-
-.calender-date {
-  font-size: 18px !important;
-  color: $wl-nav-text-active-color;
-  cursor: pointer;
-}
-
-.flight-box-bgcolor {
-  background: #fff;
-  padding: 5px;
-  border-radius: 8px;
-
-  // label for mobile select
-  .form-label {
-    font-size: 14px;
-    font-weight: 500;
-    font-family: $theme-font;
-    color: $wl-secondary-text-color;
-    margin-bottom: 6px;
-    display: inline-block;
-  }
-
-  .MuiMenuItem-root {
-    .MuiTypography-root {
-      font-size: 14px;
-      font-weight: 500;
-      font-family: $theme-font;
-      color: $wl-secondary-text-color;
-    }
-  }
-
-  .MuiFormControlLabel-root {
-    margin-top: 8px;
-
-    .MuiRadio-root {
-      color: $theme-color;
-
-      &.Mui-checked {
-        color: $theme-color;
-      }
-    }
-
-    .MuiFormControlLabel-label {
-      font-size: 12px;
-      font-family: $theme-font;
-      color: $wl-secondary-text-color;
-    }
-  }
-
-  .fare-tooltip {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    margin-top: 8px;
-    z-index: 10;
-    width: 300px;
-    padding: 12px;
-    background: #fff;
-    color: #000;
-    font-size: 13px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    white-space: pre-line;
-
-    .tooltip-title {
-      font-family: $theme-font;
-      color: $wl-text-color;
-      font-size: 16px;
-      font-weight: 600;
-      padding-bottom: 5px;
-    }
-
-    .tooltip-text {
-      font-size: 12px;
-      text-align: justify;
-      color: $wl-text-color;
-      font-family: $theme-font;
-    }
-  }
-}
-
-.search-icon {
-  font-size: 22px !important;
 }
 
 .airport-lists-card {
@@ -470,7 +319,7 @@
 .flight-search-button {
   background: $wl-primary-button-color !important;
   color: #fff !important;
-  border-radius: 3px !important;
+  border-radius: 0px !important;
   padding: 12px 28px;
   text-transform: uppercase;
   letter-spacing: 0.5px;

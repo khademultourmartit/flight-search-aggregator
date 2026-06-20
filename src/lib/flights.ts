@@ -20,7 +20,7 @@ function isSameCalendarDate(isoDateTime: string, isoDate: string): boolean {
  * seats remain for the requested passenger count.
  */
 export async function searchFlights(
-  params: FlightSearchParams
+  params: FlightSearchParams,
 ): Promise<Flight[]> {
   await simulateLatency(600);
 
@@ -28,8 +28,7 @@ export async function searchFlights(
     (flight) =>
       flight.origin === params.origin &&
       flight.destination === params.destination &&
-      isSameCalendarDate(flight.departureTime, params.date) &&
-      flight.seatsAvailable >= params.passengers
+      flight.seatsAvailable >= params.passengers,
   );
 }
 

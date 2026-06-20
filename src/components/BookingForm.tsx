@@ -140,6 +140,7 @@ export default function BookingForm({
               className={`booking-flight-input ${
                 errors[index]?.fullName ? "error" : ""
               }`}
+              autoComplete="one-time-code"
             />
             {errors[index]?.fullName && (
               <div className="booking-error-text">{errors[index].fullName}</div>
@@ -154,6 +155,7 @@ export default function BookingForm({
               className={`booking-flight-input ${
                 errors[index]?.email ? "error" : ""
               }`}
+              autoComplete="one-time-code"
             />
             {errors[index]?.email && (
               <div className="booking-error-text">{errors[index].email}</div>
@@ -168,6 +170,7 @@ export default function BookingForm({
               className={`booking-flight-input ${
                 errors[index]?.phone ? "error" : ""
               }`}
+              autoComplete="one-time-code"
             />
             {errors[index]?.phone && (
               <div className="booking-error-text">{errors[index].phone}</div>
