@@ -372,6 +372,7 @@ export default function SearchForm() {
           {/* ---------------- BUTTON ---------------- */}
           <Grid item xs={12} md={1}>
             <Button
+            className="flight-search-button"
               type="submit"
               variant="contained"
               fullWidth

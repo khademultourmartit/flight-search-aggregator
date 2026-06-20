@@ -177,6 +177,7 @@
   background: #fff;
   padding: 5px;
   border-radius: 8px;
+
   // label for mobile select
   .form-label {
     font-size: 14px;
@@ -250,6 +251,7 @@
 .search-icon {
   font-size: 22px !important;
 }
+
 .airport-lists-card {
   max-height: 230px;
   overflow-y: auto;
@@ -302,6 +304,7 @@
       gap: 8px;
       margin-top: 8px;
       padding: 5px;
+
       &:hover {
         padding: 5px;
         background-color: rgba($theme-color, 0.08);
@@ -439,6 +442,7 @@
     color: $background-light;
     font-family: $theme-font;
     border-radius: $border-radius;
+
     &:hover {
       background-color: $theme-color !important;
       box-shadow: none !important;
@@ -452,4 +456,17 @@
   font-family: $theme-font !important;
   font-weight: 600 !important;
   margin-top: 10px;
+}
+
+
+.flight-search-button {
+  background: $wl-primary-button-color !important;
+  color: #fff !important;
+  border-radius: 3px !important;
+  padding: 12px 28px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: $theme-font !important;
+  font-weight: 500 !important;
+  font-size: 12px !important;
 }
