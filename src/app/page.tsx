@@ -6,6 +6,7 @@ import SearchForm from "@/components/FlightSearchBox";
 import HomeService from "@/components/LandingPage/HomeService";
 import TrustedAirline from "@/components/LandingPage/TrustedAirline";
 import WorldExplore from "@/components/LandingPage/WorldExplore";
+import PopularDestination from "@/components/LandingPage/PopularDestination";
 
 export default function HomePage() {
   return (
@@ -19,6 +20,10 @@ export default function HomePage() {
 
         <Box mt={5}>
           <HomeService />
+        </Box>
+
+        <Box mt={5}>
+          <PopularDestination />
         </Box>
 
         <Box mt={5}>
