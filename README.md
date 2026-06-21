@@ -1,4 +1,4 @@
-# iBox Air — Flight Search Aggregator
+# Flight Search Aggregator
 
 A flight search and booking demo built for the iBox Lab frontend take-home
 exercise: search for flights, filter and sort results, select a flight, and
@@ -33,17 +33,45 @@ off a local `flights.json` file served through a real (if mock) API route.
 
 ## What's included
 
-| Requirement | Where |
-|---|---|
-| Search by origin, destination, date, passengers | `/` and `src/components/SearchForm.tsx` |
-| Results list, sort, filter | `src/app/search/SearchResultsClient.tsx`, `FlightFilters.tsx` |
-| Loading / empty / error states | `LoadingState.tsx`, `EmptyState.tsx`, `ErrorState.tsx` |
-| Select flight → booking form → confirmation | `/booking/[flightId]`, `/confirmation` |
-| Mock API | `src/app/api/flights/route.ts` (backed by `src/data/flights.json`) |
-| TypeScript throughout | `src/types/flight.ts`, used in every component/route |
-| Responsive | MUI breakpoints (`xs`/`sm`/`md`) throughout |
-| Accessible | semantic landmarks, labelled inputs, `role="alert"`/`role="status"`, visible focus ring, keyboard-operable nav |
-| State management | plain React Context (`BookingContext`) — see below |
+| Requirement                                     | Where                                                                                                          |
+| ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Search by origin, destination, date, passengers | `/` and `src/components/SearchForm.tsx`                                                                        |
+| Results list, sort, filter                      | `src/app/search/SearchResultsClient.tsx`, `FlightFilters.tsx`                                                  |
+| Loading / empty / error states                  | `LoadingState.tsx`, `EmptyState.tsx`, `ErrorState.tsx`                                                         |
+| Select flight → booking form → confirmation     | `/booking/[flightId]`, `/confirmation`                                                                         |
+| Mock API                                        | `src/app/api/flights/route.ts` (backed by `src/data/flights.json`)                                             |
+| TypeScript throughout                           | `src/types/flight.ts`, used in every component/route                                                           |
+| Responsive                                      | MUI breakpoints (`xs`/`sm`/`md`) throughout                                                                    |
+| Accessible                                      | semantic landmarks, labelled inputs, `role="alert"`/`role="status"`, visible focus ring, keyboard-operable nav |
+| State management                                | plain React Context (`BookingContext`) — see below                                                             |
+
+---
+
+---
+
+### 🔎 Flight Search System
+
+Search flights by:
+
+- Origin
+- Destination
+- Departure date
+- Number of passengers
+
+### 🌍 Supported Destinations
+
+The system currently supports the following routes:
+
+- DAC → DXB (Dhaka → Dubai)
+- DAC → BKK (Dhaka → Bangkok)
+- DAC → SPD (Saidpur Airport)
+- DAC → CXB (Cox’s Bazar)
+
+These destinations are used across:
+
+- Search form
+- Popular destination slider
+- Quick search shortcuts
 
 ---
 
@@ -91,50 +119,6 @@ event handlers.
 seats removes it from the results. This was a deliberate small touch so
 the passenger field isn't purely decorative.
 
-**Two routes are deliberately "broken."** `JFK` and `LHR` are selectable in
-the airport dropdowns but have no flights in the mock data, so picking
-either origin or destination demonstrates the empty state without needing
-a fake toggle. To see the error state, remove a required query param, e.g.
-visit `/search?origin=DAC&destination=DXB&date=&passengers=1` directly.
-
-**Why Material UI's classic `Grid`, not `Grid2`.** Pinned to MUI v5's
-existing `Grid` API for stability within the exercise's time box, rather
-than adopting the newer `Grid2` API, which would be the natural next
-upgrade alongside a wider MUI v6 migration.
-
----
-
-## Project structure
-
-```
-src/
-  app/
-    api/flights/route.ts        mock API: GET /api/flights
-    booking/[flightId]/page.tsx booking page (server component)
-    confirmation/page.tsx       confirmation page (reads BookingContext)
-    search/                     search results page + Suspense shell
-    layout.tsx, providers.tsx   root layout, MUI theme + context providers
-    page.tsx                    homepage (hero + search + promo video)
-  components/                   presentational + form components
-  context/BookingContext.tsx    the app's one piece of shared state
-  data/flights.json             ~30 mock flights, DAC → DXB
-  lib/
-    flights.ts                  data access (reads flights.json)
-    theme.ts                    MUI theme
-  types/flight.ts                shared TypeScript types
-  utils/                         formatting + airport lookup helpers
-scripts/generate_flights.py     one-off script used to generate flights.json
-```
-
----
-
-## The promotional video
-
-`src/components/PromoVideo.tsx` embeds a real `<video>` element on the
-homepage. It currently points at a public-domain placeholder clip (Big Buck
-Bunny) since no real promotional footage was provided — swap the `src` in
-that file for an actual video before shipping.
-
 ---
 
 ## Accessibility notes
@@ -153,24 +137,3 @@ What's not done: no automated accessibility audit (e.g. axe) was run —
 listed under "next steps" below.
 
 ---
-
-## What I'd do next
-
-Given more time, in priority order:
-
-1. **Tests.** Nothing here has automated test coverage. I'd add component
-   tests (Vitest + React Testing Library) for the filtering/sorting logic
-   and the booking form's validation, plus a couple of Playwright flows for
-   search → select → book → confirm.
-2. **A real price filter.** `FlightFiltersState.maxPrice` already exists in
-   the data model but isn't wired to a UI control yet — a `Slider` bound to
-   it is a small addition.
-3. **Debounce/cancel in-flight requests** when a user changes the search
-   form quickly (`AbortController` in `SearchResultsClient`), to avoid
-   race conditions between overlapping fetches.
-4. **Pagination or virtualization** once result sets grow well beyond ~30.
-5. **Swap the mock API for a real backend** — `lib/flights.ts` is the only
-   file that would need to change, since the route handler and the client
-   already talk to it over HTTP.
-6. **Replace the placeholder promo video** with real footage and a poster
-   image.
