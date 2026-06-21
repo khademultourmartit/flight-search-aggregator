@@ -135,6 +135,12 @@ const TravelerBox = ({
             </button>
           </Stack>
         </Stack>
+
+        <Box mt={2} textAlign="right">
+          <Button size="small" onClick={handleClose} className="done-btn">
+            DONE
+          </Button>
+        </Box>
       </Box>
     </Box>
   );

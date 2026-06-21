@@ -136,7 +136,7 @@
         display: flex;
         align-items: center;
         gap: 5px;
-        font-weight: 500;
+        font-weight: 500 !important;
 
         svg {
           color: $theme-color;
@@ -147,6 +147,7 @@
       .airport-all {
         font-size: 11px;
         color: $wl-secondary-text-color;
+        font-weight: 600 !important;
       }
     }
 
@@ -189,7 +190,7 @@
         .airport-city {
           color: $wl-secondary-text-color;
           font-size: 13px;
-          font-weight: 500;
+          font-weight: 600 !important;
           text-overflow: ellipsis;
           overflow: hidden;
           white-space: nowrap;
@@ -273,7 +274,7 @@
     color: $background-light;
 
     &.decrement {
-      background-color: #ad8398;
+      background-color: #757f89;
     }
 
     &.increment {
@@ -296,13 +297,14 @@
   }
 
   .done-btn {
-    background-color: $theme-color;
+    background-color: $wl-primary-button-color;
     color: $background-light;
     font-family: $theme-font;
     border-radius: $border-radius;
+    font-size: 12px;
 
     &:hover {
-      background-color: $theme-color !important;
+      background-color: $wl-primary-button-color !important;
       box-shadow: none !important;
     }
   }
