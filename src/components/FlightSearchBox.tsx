@@ -27,7 +27,25 @@ export interface Airport {
   countryCode: string;
 }
 
-export default function SearchForm() {
+interface FlightSearchBoxProps {
+  initialValues?: {
+    origin: string;
+    originCityName: string;
+    originAirportName: string;
+    destination: string;
+    destinationCityName: string;
+    destinationAirportName: string;
+    date: string;
+    passengers: number;
+    adt: number;
+    chd: number;
+    inf: number;
+  };
+}
+
+export default function FlightSearchBox({
+  initialValues,
+}: FlightSearchBoxProps) {
   const router = useRouter();
 
   // ---------------- FROM ----------------
@@ -37,10 +55,11 @@ export default function SearchForm() {
 
   const [fromSearchText, setFromSearchText] = React.useState<Airport>({
     id: 1078,
-    airportCode: "DAC",
-    airportName: "Hazrat Shahjalal Intl Arpt",
-    cityName: "Dhaka",
-    cityCode: "DAC",
+    airportCode: initialValues?.origin ?? "DAC",
+    airportName:
+      initialValues?.originAirportName ?? "Hazrat Shahjalal Intl Arpt",
+    cityName: initialValues?.originCityName ?? "Dhaka",
+    cityCode: initialValues?.origin ?? "DAC",
     countryName: "Bangladesh",
     countryCode: "BD",
   });
@@ -49,25 +68,28 @@ export default function SearchForm() {
   const [openTo, setOpenTo] = React.useState(false);
   const [toKeyword, setToKeyword] = React.useState("");
   const [toOptions, setToOptions] = React.useState<Airport[]>([]);
+
   const [toSearchText, setToSearchText] = React.useState<Airport>({
     id: 1848,
-    airportCode: "DXB",
-    airportName: "Dubai Intl Arpt",
-    cityName: "Dubai",
-    cityCode: "DXB",
+    airportCode: initialValues?.destination ?? "DXB",
+    airportName: initialValues?.destinationAirportName ?? "Dubai Intl Arpt",
+    cityName: initialValues?.destinationCityName ?? "Dubai",
+    cityCode: initialValues?.destination ?? "DXB",
     countryName: "United Arab Emirates",
     countryCode: "AE",
   });
 
   // ---------------- OTHER ----------------
   const [openJourneyDate, setOpenJourneyDate] = React.useState(false);
-  const [date, setDate] = React.useState<Date>(new Date());
+  const [date, setDate] = React.useState<Date>(
+    initialValues?.date ? new Date(initialValues.date) : new Date(),
+  );
 
   const [travelerBoxOpen, setTravelerBoxOpen] = React.useState(false);
   const [passengers, setPassengers] = React.useState({
-    adult: 1,
-    child: 0,
-    infant: 0,
+    adult: initialValues?.adt ?? 1,
+    child: initialValues?.chd ?? 0,
+    infant: initialValues?.inf ?? 0,
   });
 
   const totalPassengers =
@@ -90,6 +112,50 @@ export default function SearchForm() {
     if (type === "from") setFromOptions(airports);
     else setToOptions(airports);
   };
+
+  const getAirportByCode = async (code: string): Promise<Airport | null> => {
+    const res = await fetch(
+      `http://72.60.42.249:112/airports/search?searchInput=${code}`,
+    );
+
+    const data = await res.json();
+
+    const airports: Airport[] = data?.payload || [];
+
+    return (
+      airports.find(
+        (airport) => airport.airportCode.toUpperCase() === code.toUpperCase(),
+      ) ?? null
+    );
+  };
+
+  React.useEffect(() => {
+    const loadInitialValues = async () => {
+      if (!initialValues) return;
+
+      try {
+        const [fromAirport, toAirport] = await Promise.all([
+          getAirportByCode(initialValues.origin),
+          getAirportByCode(initialValues.destination),
+        ]);
+
+        if (fromAirport) setFromSearchText(fromAirport);
+        if (toAirport) setToSearchText(toAirport);
+
+        setDate(new Date(initialValues.date));
+
+        setPassengers({
+          adult: initialValues.adt,
+          child: initialValues.chd,
+          infant: initialValues.inf,
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    loadInitialValues();
+  }, [initialValues]);
 
   const updatePassenger = (type: string, action: "inc" | "dec") => {
     setPassengers((prev) => {
@@ -118,7 +184,13 @@ export default function SearchForm() {
 
     const params = new URLSearchParams({
       origin: fromSearchText.cityCode,
+      originCityName: fromSearchText.cityName,
+      originAirportName: fromSearchText.airportName,
+
       destination: toSearchText.cityCode,
+      destinationCityName: toSearchText.cityName,
+      destinationAirportName: toSearchText.airportName,
+
       date: moment(date).format("YYYY-MM-DD"),
       passengers: String(totalPassengers),
       adt: String(passengers?.adult),

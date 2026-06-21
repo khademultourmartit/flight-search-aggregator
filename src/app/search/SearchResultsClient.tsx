@@ -73,7 +73,16 @@ export default function SearchResultsClient() {
   const searchParams = useSearchParams();
 
   const origin = searchParams.get("origin") ?? "DAC";
+  const originCityName = searchParams.get("originCityName") ?? "Dhaka";
+  const originAirportName =
+    searchParams.get("originAirportName") ?? "Hazrat Shahjalal Intl Arpt";
+
   const destination = searchParams.get("destination") ?? "DXB";
+  const destinationCityName =
+    searchParams.get("destinationCityName") ?? "Dubai";
+  const destinationAirportName =
+    searchParams.get("destinationAirportName") ?? "Dubai Intl Arpt";
+
   const date = searchParams.get("date") ?? "2026-06-19";
   const passengers = searchParams.get("passengers") ?? "1";
   const adt = Number(searchParams.get("adt") ?? "1");
@@ -158,14 +167,22 @@ export default function SearchResultsClient() {
     <Box pb={5}>
       <Container maxWidth="xl">
         <Box sx={{ mb: 3 }}>
+          {/* <FlightSearchBox /> */}
+
           <FlightSearchBox
-          //  compact
-          // initialValues={{
-          //   origin,
-          //   destination,
-          //   date,
-          //   passengers: Number(passengers),
-          // }}
+            initialValues={{
+              origin,
+              originCityName,
+              originAirportName,
+              destination,
+              destinationCityName,
+              destinationAirportName,
+              date,
+              passengers: Number(passengers),
+              adt,
+              chd,
+              inf,
+            }}
           />
         </Box>
 
