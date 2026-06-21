@@ -16,6 +16,7 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import moment from "moment";
 import TravelerBox from "./Flight/TravelerBox";
+import { AIRPORTS } from "@/data/airports";
 
 export interface Airport {
   id: number;
@@ -98,35 +99,32 @@ export default function FlightSearchBox({
   const [error, setError] = React.useState<string | null>(null);
 
   // ---------------- API ----------------
+
   const fetchAirports = async (query: string, type: "from" | "to") => {
     if (!query || query.length < 2) return;
 
-    const res = await fetch(
-      `http://72.60.42.249:112/airports/search?searchInput=${query}`,
+    const q = query.toLowerCase();
+
+    const filtered = AIRPORTS.filter(
+      (airport) =>
+        airport.airportCode.toLowerCase().includes(q) ||
+        airport.cityName.toLowerCase().includes(q) ||
+        airport.airportName.toLowerCase().includes(q),
     );
 
-    const data = await res.json();
-
-    const airports: Airport[] = data?.payload || [];
-
-    if (type === "from") setFromOptions(airports);
-    else setToOptions(airports);
+    if (type === "from") setFromOptions(filtered);
+    else setToOptions(filtered);
   };
 
   const getAirportByCode = async (code: string): Promise<Airport | null> => {
-    const res = await fetch(
-      `http://72.60.42.249:112/airports/search?searchInput=${code}`,
-    );
+    if (!code) return null;
 
-    const data = await res.json();
-
-    const airports: Airport[] = data?.payload || [];
-
-    return (
-      airports.find(
+    const airport =
+      AIRPORTS.find(
         (airport) => airport.airportCode.toUpperCase() === code.toUpperCase(),
-      ) ?? null
-    );
+      ) ?? null;
+
+    return airport;
   };
 
   React.useEffect(() => {
